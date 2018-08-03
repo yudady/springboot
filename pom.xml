@@ -22,7 +22,10 @@
     </properties>
 
     <modules>
-        <module>springboot-01</module>
+        <module>springboot-01-helloword</module>
+        <module>springboot-02-datasource</module>
+		<module>springboot-03-JTA</module>
+
     </modules>
 
 
