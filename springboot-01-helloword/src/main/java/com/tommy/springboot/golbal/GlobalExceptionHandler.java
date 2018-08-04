@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 			return "{json:errot}";
 		} else {
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("exception", e);
+			mav.addObject("config", e);
 			mav.addObject("url", reqest.getRequestURL());
 			mav.setViewName(ERROR_VIEW);
 			return mav;

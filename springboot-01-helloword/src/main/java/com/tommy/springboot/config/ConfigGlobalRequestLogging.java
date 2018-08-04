@@ -1,10 +1,10 @@
-package com.tommy.springboot.golbal;
+package com.tommy.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 @Configuration
-public class GlobalRequestLogging {
+public class ConfigGlobalRequestLogging {
 
 	/**
 	 * 记录web request 参数

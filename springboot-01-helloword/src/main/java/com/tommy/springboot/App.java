@@ -24,4 +24,6 @@ public class App extends SpringBootServletInitializer {
 		context = SpringApplication.run(App.class, args);
 
 	}
+
+
 }
