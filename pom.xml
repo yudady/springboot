@@ -25,6 +25,7 @@
         <module>springboot-01-helloword</module>
         <module>springboot-02-datasource</module>
 		<module>springboot-03-JTA</module>
+        <module>springboot-04-flyway</module>
 
     </modules>
 
