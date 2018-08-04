@@ -27,4 +27,10 @@ datasource:
     username: myPayCenterTommy
     password: myPay4Zv
 
+## https://github.com/pagehelper/pagehelper-spring-boot
+pagehelper:
+  dialect-alias:
+    oracle: com.github.pagehelper.dialect.helper.OracleDialect
+
+
 

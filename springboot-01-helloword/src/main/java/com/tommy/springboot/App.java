@@ -1,11 +1,22 @@
 package com.tommy.springboot;
 
+import java.util.ArrayList;
+import java.util.EventListener;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
+import com.tommy.springboot.controller.DemoFilter;
+import com.tommy.springboot.controller.DemoListener;
+import com.tommy.springboot.controller.DemoServlet;
 @SpringBootApplication
 public class App extends SpringBootServletInitializer {
 
@@ -24,6 +35,5 @@ public class App extends SpringBootServletInitializer {
 		context = SpringApplication.run(App.class, args);
 
 	}
-
 
 }
