@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-//@Order(Ordered.LOWEST_PRECEDENCE - 10) // ★★★ 優先順を指定 ★★★
+@Order(Ordered.LOWEST_PRECEDENCE - 10) // ★★★ 優先順を指定 ★★★
 public class DataSourceAspect {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
