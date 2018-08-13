@@ -14,7 +14,7 @@ public class HelloController {
 	@RequestMapping(value = "/")
 	public @ResponseBody String index() {
 
-		String returnMsg = "hello world";
+		String returnMsg = "Hello World";
 		logger.debug("HelloController : ", returnMsg);
 
 		return returnMsg;

@@ -48,6 +48,7 @@
         <module>springboot-02-datasource</module>
 		<module>springboot-03-JTA</module>
         <module>springboot-04-flyway</module>
+        <module>springboot-05-war</module>
 
     </modules>
 
@@ -57,6 +58,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.4.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

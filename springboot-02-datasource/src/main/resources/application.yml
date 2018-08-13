@@ -1,5 +1,7 @@
 server:
-  port: 80
+  port: 8080
+  servlet:
+    context-path: sp02
 
 
 logging :
@@ -13,6 +15,7 @@ logging :
 spring:
   jmx:
     enabled: true
+
 
 
 datasource:
