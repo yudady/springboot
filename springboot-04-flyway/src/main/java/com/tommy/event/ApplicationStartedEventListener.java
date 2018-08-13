@@ -6,8 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationStartedEventListener implements ApplicationListener<ApplicationStartedEvent> {
 
-    @Override public void onApplicationEvent(ApplicationStartedEvent event) {
-        System.out.println("......ApplicationStartedEvent......");
-    }
+	@Override
+	public void onApplicationEvent(ApplicationStartedEvent event) {
+		System.out.println("......ApplicationStartedEvent......");
+	}
 
 }

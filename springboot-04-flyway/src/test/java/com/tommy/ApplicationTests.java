@@ -22,9 +22,12 @@ public class ApplicationTests {
 		// 准备，清空user表
 		userSerivce.deleteAllUsers();
 	}
-
 	@Test
-	public void test() throws Exception {
+	public void test01() throws Exception {
+		System.out.println("DB create ~~~~~~~~~~~");
+	}
+	@Test
+	public void test02() throws Exception {
 		// 插入5个用户
 		userSerivce.create("a", 1);
 		userSerivce.create("b", 2);
@@ -36,7 +39,7 @@ public class ApplicationTests {
 		Assert.assertEquals(5, userSerivce.getAllUsers().intValue());
 
 		// 删除两个用户
-		userSerivce.deleteByName("a");
+		userSerivce.deleteByName("b");
 		userSerivce.deleteByName("e");
 
 		// 查数据库，应该有5个用户
