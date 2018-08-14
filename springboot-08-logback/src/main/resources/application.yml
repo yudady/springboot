@@ -1,0 +1,7 @@
+logging:
+  file: D:/logs/auth-dev.log
+  level:
+    root: Info
+    org.springframework: info
+    com: debug
+    com.xxx.ooo.spring: 'OFF'

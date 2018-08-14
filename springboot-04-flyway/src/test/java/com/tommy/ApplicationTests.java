@@ -1,17 +1,19 @@
 package com.tommy;
 
-import com.tommy.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.tommy.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@Ignore
 public class ApplicationTests {
 
 	@Autowired
@@ -22,10 +24,12 @@ public class ApplicationTests {
 		// 准备，清空user表
 		userSerivce.deleteAllUsers();
 	}
+
 	@Test
 	public void test01() throws Exception {
 		System.out.println("DB create ~~~~~~~~~~~");
 	}
+
 	@Test
 	public void test02() throws Exception {
 		// 插入5个用户
@@ -46,6 +50,5 @@ public class ApplicationTests {
 		Assert.assertEquals(3, userSerivce.getAllUsers().intValue());
 
 	}
-
 
 }
