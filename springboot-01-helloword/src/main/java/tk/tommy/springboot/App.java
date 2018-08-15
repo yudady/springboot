@@ -8,19 +8,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class App extends SpringBootServletInitializer {
 
-	private static ConfigurableApplicationContext context;
-
-	public static ConfigurableApplicationContext getContext() {
-		return context;
-	}
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(App.class);
 	}
 
 	public static void main(String[] args) {
-		context = SpringApplication.run(App.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
 		// ServiceRouter serviceRouter = context.getBean(ServiceRouter.class);
 
 		// IService service = serviceRouter.getService(1);

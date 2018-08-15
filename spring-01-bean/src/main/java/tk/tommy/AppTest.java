@@ -8,12 +8,14 @@ import tk.tommy.bean.MyBean;
 import tk.tommy.bean.MyBean2;
 import tk.tommy.bean.MyBeanFactory;
 import tk.tommy.config.MyConfig;
+import tk.tommy.init.MyBeanPostProcessor;
 public class AppTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AppTest.class);
 
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext anno = new AnnotationConfigApplicationContext(MyConfig.class);
+		AnnotationConfigApplicationContext anno = new AnnotationConfigApplicationContext(MyConfig.class,
+			MyBeanPostProcessor.class);
 		LOGGER.debug("annotationConfigApplicationContext =>  {} ", anno);
 		LOGGER.debug("myBean =>  {} ", anno.getBean("myBean"));
 		LOGGER.debug("myBean =>  {} ", anno.getBean(MyBean.class));
@@ -31,8 +33,6 @@ public class AppTest {
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
-
-
 
 		anno.close();
 

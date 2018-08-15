@@ -18,6 +18,8 @@ public class DynamicRegisterBean2SpringContainer {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+
 	public static String getCamelCase(Class clazz) {
 		return clazz.getSimpleName().substring(0, 1).toLowerCase() + clazz.getSimpleName().substring(1);
 	}
