@@ -27,10 +27,14 @@ public class AppTest {
 		LOGGER.debug("myBean2 =>  {} ", anno.getBean(MyBean2.class));
 		LOGGER.debug("myBean2 =>  {} ", anno.getBean(MyBean2.class));
 
-
 		// MyBeanFactory
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
+
+
+
+		anno.close();
+
 	}
 }

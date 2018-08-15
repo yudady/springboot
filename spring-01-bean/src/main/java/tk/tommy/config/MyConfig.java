@@ -21,7 +21,7 @@ public class MyConfig {
 		return new MyBean2();
 	}
 
-	@Bean
+	@Bean(name = "myBeanFactory", initMethod = "init", destroyMethod = "destroy")
 	public MyBeanFactory myBeanFactory() {
 		return new MyBeanFactory();
 	}

@@ -8,8 +8,8 @@ import javax.servlet.ServletContextListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import tk.tommy.tools.CustomerSpringAnnotionFactoryBean;
 import tk.tommy.tools.CustDbInfo;
-import tk.tommy.tools.JdbcLoadDatas;
 
 public class DemoListener implements ServletContextListener {
 
@@ -19,7 +19,8 @@ public class DemoListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 		System.out.println("==>DemoListener启动");
 
-		List<CustDbInfo> custsInfos = JdbcLoadDatas.getCustsInfo();
+		// List<CustDbInfo> custsInfos = JdbcLoadDatas.getCustsInfo();
+		List<CustDbInfo> custsInfos = CustomerSpringAnnotionFactoryBean.getCustsInfo();
 		for (CustDbInfo custsInfo : custsInfos) {
 			System.out.println("DB : " + custsInfo.toString());
 		}

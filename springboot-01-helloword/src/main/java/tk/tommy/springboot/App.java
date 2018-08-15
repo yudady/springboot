@@ -21,7 +21,12 @@ public class App extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		context = SpringApplication.run(App.class, args);
+		// ServiceRouter serviceRouter = context.getBean(ServiceRouter.class);
 
+		// IService service = serviceRouter.getService(1);
+		// service.print("hello world");
+		// service = serviceRouter.getService(2);
+		// service.print("hello world");
 	}
 
 }
