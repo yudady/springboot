@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+
+
+logging :
+  level:
+    root: info
+    org.springframework: info
+    org.springframework.transaction: debug
+    tk.tommy: debug
+
+
+spring:
+  jmx:
+    enabled: true
+
+
+
+datasource:
+  mypaycenter:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url : jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01
+    username: mypaycenter
+    password: myPay4Zv
+  rd:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url : jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01
+    username: myPayCenterTommy
+    password: myPay4Zv
+
+
+
+
+
