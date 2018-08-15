@@ -54,6 +54,8 @@
         <module>springboot-07-restful</module>
         <module>springboot-08-logback</module>
         <module>springboot-09-async</module>
+        <module>springboot-10-scheduled</module>
+        <module>spring-01-bean</module>
 
     </modules>
 
