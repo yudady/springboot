@@ -56,6 +56,7 @@
         <module>springboot-09-async</module>
         <module>springboot-10-scheduled</module>
         <module>spring-01-bean</module>
+        <module>springboot-90-my-datasource</module>
 
     </modules>
 
