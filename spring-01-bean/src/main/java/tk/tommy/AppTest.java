@@ -8,6 +8,8 @@ import tk.tommy.bean.MyBean;
 import tk.tommy.bean.MyBean2;
 import tk.tommy.bean.MyBeanFactory;
 import tk.tommy.config.MyConfig;
+import tk.tommy.init.MyBeanDefinitionRegistryPostProcessor;
+import tk.tommy.init.MyBeanFactoryPostProcessor;
 import tk.tommy.init.MyBeanPostProcessor;
 public class AppTest {
 
@@ -15,7 +17,8 @@ public class AppTest {
 
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext anno = new AnnotationConfigApplicationContext(MyConfig.class,
-			MyBeanPostProcessor.class);
+			MyBeanPostProcessor.class, MyBeanFactoryPostProcessor.class,
+			MyBeanDefinitionRegistryPostProcessor.class);
 		LOGGER.debug("annotationConfigApplicationContext =>  {} ", anno);
 		LOGGER.debug("myBean =>  {} ", anno.getBean("myBean"));
 		LOGGER.debug("myBean =>  {} ", anno.getBean(MyBean.class));
@@ -33,7 +36,9 @@ public class AppTest {
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
-
+		for (int i = 0; i < 10; i++) {
+			LOGGER.debug("动态注册 bean =>  {} ", i + " - " + anno.getBean("registryBean" + i));
+		}
 		anno.close();
 
 	}
