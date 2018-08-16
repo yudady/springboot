@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tk.tommy.mybatis.dao.PyCustMapper;
 import tk.tommy.mybatis.model.PyCust;
@@ -16,5 +17,14 @@ public class RdCustService {
 	public List<PyCust> selectAll() {
 		List<PyCust> pyCusts = pyCustMapper.selectAll();
 		return pyCusts;
+	}
+
+	@Transactional
+	public void syncPyCusts(List<PyCust> pyCusts) {
+		pyCustMapper.deleteAll();
+		for (PyCust pyCust : pyCusts) {
+			pyCustMapper.insert(pyCust);
+		}
+
 	}
 }

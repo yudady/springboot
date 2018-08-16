@@ -16,25 +16,18 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import tk.tommy.springboot.datasource.DataSourceContextHolder;
 import tk.tommy.springboot.datasource.DynamicDataSource;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @SpringBootApplication
 @MapperScan(basePackages = {"tk.tommy.mybatis.dao"})
 public class App extends SpringBootServletInitializer {
-
-	private static ConfigurableApplicationContext context;
-
-	public static ConfigurableApplicationContext getContext() {
-		return context;
-	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -42,7 +35,7 @@ public class App extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		context = SpringApplication.run(App.class, args);
+		SpringApplication.run(App.class, args);
 
 	}
 
@@ -102,6 +95,7 @@ public class App extends SpringBootServletInitializer {
 
 		return sqlSessionFactoryBean;
 	}
+
 	@Bean
 	public DataSourceTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);

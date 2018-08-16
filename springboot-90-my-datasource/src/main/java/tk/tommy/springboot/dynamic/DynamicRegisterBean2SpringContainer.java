@@ -6,19 +6,19 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
-import tk.tommy.springboot.App;
 
 @Component
 public class DynamicRegisterBean2SpringContainer {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-
+	@Autowired
+	ApplicationContext applicationContext;
 
 	public static String getCamelCase(Class clazz) {
 		return clazz.getSimpleName().substring(0, 1).toLowerCase() + clazz.getSimpleName().substring(1);
@@ -28,7 +28,7 @@ public class DynamicRegisterBean2SpringContainer {
 		dynamicCreateBean(clazz, propertyValue, null);
 	}
 
-	public void dynamicCreateBeanByReference(Class clazz,Map<String, String> propertyReference) {
+	public void dynamicCreateBeanByReference(Class clazz, Map<String, String> propertyReference) {
 		dynamicCreateBean(clazz, null, propertyReference);
 	}
 
@@ -36,10 +36,9 @@ public class DynamicRegisterBean2SpringContainer {
 		Map<String, String> propertyReference) {
 
 		// 获取context.
-		ApplicationContext ctx = App.getContext();
 
 		// 获取BeanFactory
-		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) ctx
+		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext
 			.getAutowireCapableBeanFactory();
 
 		// 创建bean信息.
@@ -79,10 +78,9 @@ public class DynamicRegisterBean2SpringContainer {
 
 	public void dynamicDeleteBean(Class clazz) {
 		// 获取context
-		ApplicationContext ctx = App.getContext();
 
 		// 获取BeanFactory
-		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) ctx
+		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext
 			.getAutowireCapableBeanFactory();
 
 		// 删除bean.
