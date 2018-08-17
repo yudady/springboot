@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PyCustRepository {
+public class RdRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -16,6 +16,12 @@ public class PyCustRepository {
 	public List<Map<String, Object>> queryForListPyCust() {
 
 		String sql = "SELECT * FROM PY_CUST ORDER BY ID ";
+		return jdbcTemplate.queryForList(sql);
+	}
+
+	public List<Map<String, Object>> queryForListPyOrder() {
+
+		String sql = "SELECT * FROM PY_ORDER ORDER BY REMARK ";
 		return jdbcTemplate.queryForList(sql);
 	}
 

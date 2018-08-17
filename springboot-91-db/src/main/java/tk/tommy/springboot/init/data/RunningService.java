@@ -11,7 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
-import tk.tommy.springboot.dao.PyCustRepository;
+import tk.tommy.springboot.dao.RdRepository;
 import tk.tommy.springboot.vo.DynamicCustContainer;
 
 @Service
@@ -20,13 +20,12 @@ public class RunningService implements CommandLineRunner {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	PyCustRepository pyCustRepository;
+	@Autowired RdRepository rdRepository;
 
 	@Override
 	public void run(String... strings) throws Exception {
 
-		List<Map<String, Object>> maps = pyCustRepository.queryForListPyCust();
+		List<Map<String, Object>> maps = rdRepository.queryForListPyCust();
 
 		for (Map<String, Object> map : maps) {
 

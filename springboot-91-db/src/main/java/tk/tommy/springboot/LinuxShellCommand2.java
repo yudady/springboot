@@ -9,7 +9,7 @@ import com.jcabi.ssh.SshByPassword;
 public class LinuxShellCommand2 {
 
 	public static String server = "rd3-1";
-	public static String line = "746386";
+	public static String line = "1685973";
 
 	public static void main(String argv[]) throws Exception {
 		String cmd = "cat /mnt/nfs/var/" + server + "/mypaycenter.log | head -n " + line + " | tail -n 2000";

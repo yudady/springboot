@@ -25,7 +25,20 @@ public class DynamicCustContainer {
 			configFile.setProperty("username", username);
 			configFile.setProperty("password", password);
 			configFile.setProperty("connectionTimeout", "1000");
-			hikariDataSource = new HikariDataSource(new HikariConfig(configFile));
+			configFile.setProperty("connectionTestQuery", "select sysdate from dual");
+			HikariConfig config = new HikariConfig(configFile);
+			config.setConnectionTimeout(10 * 1000);
+			config.setIdleTimeout(30 * 1000);
+			config.setMaxLifetime(60 * 1000);
+			config.setMinimumIdle(3);
+			config.setMaximumPoolSize(10);
+			config.addDataSourceProperty("cachePrepStmts", "true");
+			config.addDataSourceProperty("prepStmtCacheSize", "1000");
+			config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
+
+
+			hikariDataSource = new HikariDataSource(config);
 			jdbcTemplate = new JdbcTemplate(hikariDataSource);
 			DbManager.addOne(this);
 		} catch (Throwable e) {

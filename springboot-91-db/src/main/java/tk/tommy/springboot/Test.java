@@ -1,5 +1,6 @@
 package tk.tommy.springboot;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 public class Test {
@@ -16,5 +17,7 @@ public class Test {
 		LocalDateTime target2 = LocalDateTime.parse("2018-08-17 14:00:00.373", formatter);
 		System.out.println(target2.compareTo(target));
 
+
+		System.out.println(LocalDate.now().toString().replace("-",""));
 	}
 }
