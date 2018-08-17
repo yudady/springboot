@@ -1,10 +1,12 @@
 package tk.tommy.springboot;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import javafx.scene.Parent;
 @SpringBootApplication
 public class App extends SpringBootServletInitializer {
 
@@ -14,7 +16,12 @@ public class App extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
+		// ConfigurableApplicationContext context = SpringApplication.run(App.class,
+		// args);
+
+		ConfigurableApplicationContext run = new SpringApplicationBuilder().sources(App.class)
+			.child(App.class).bannerMode(Banner.Mode.OFF).run(args);
+
 		// ServiceRouter serviceRouter = context.getBean(ServiceRouter.class);
 
 		// IService service = serviceRouter.getService(1);

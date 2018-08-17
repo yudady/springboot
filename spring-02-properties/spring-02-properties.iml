@@ -32,6 +32,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.yaml:snakeyaml:1.19" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.0.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.0.8.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.0.8.RELEASE" level="project" />
