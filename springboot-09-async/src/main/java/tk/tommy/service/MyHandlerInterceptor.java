@@ -32,7 +32,7 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
 
 		logger.info("同步Interceptor.postHandle");
 		// HandlerMethod handlerMethod = (HandlerMethod) handler;
-		logger.info(Thread.currentThread().getName() + "服务调用完成，返回结果给客户端");
+		logger.info(Thread.currentThread().getName() + "同步服务调用完成，返回结果给客户端");
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class MyHandlerInterceptor implements HandlerInterceptor {
 		logger.info("同步Interceptor.afterCompletion");
 
 		if (null != ex) {
-			System.out.println("发生异常:" + ex.getMessage());
+			System.out.println("同步发生异常:" + ex.getMessage());
 		}
 	}
 

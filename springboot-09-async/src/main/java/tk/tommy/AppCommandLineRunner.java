@@ -11,13 +11,13 @@ import tk.tommy.service.GitHubLookupService;
 import tk.tommy.vo.User;
 
 @Component
-public class AppRunner implements CommandLineRunner {
+public class AppCommandLineRunner implements CommandLineRunner {
 
-    private static final Logger logger = LoggerFactory.getLogger(AppRunner.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppCommandLineRunner.class);
 
     private final GitHubLookupService gitHubLookupService;
 
-    public AppRunner(GitHubLookupService gitHubLookupService) {
+    public AppCommandLineRunner(GitHubLookupService gitHubLookupService) {
 		this.gitHubLookupService = gitHubLookupService;
     }
 

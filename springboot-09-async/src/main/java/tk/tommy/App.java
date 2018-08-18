@@ -5,15 +5,19 @@ import java.util.concurrent.Executor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
-@EnableAsync // 开启异步
-public class MainApp {
+@EnableAsync // 开启异步 	@Async
+@EnableSwagger2 // http://localhost:8080/swagger-ui.html
+public class App {
 
 	public static void main(String[] args) {
 
-		SpringApplication.run(MainApp.class, args);
+		SpringApplication.run(App.class, args);
 	}
 
 	/**

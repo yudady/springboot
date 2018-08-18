@@ -33,7 +33,7 @@ public class MyAsyncHandlerInterceptor implements AsyncHandlerInterceptor {
 
 		logger.info("异步Interceptor.postHandle");
 
-		logger.info(Thread.currentThread().getName()+ "服务调用完成，返回结果给客户端");
+		logger.info(Thread.currentThread().getName()+ "异步服务调用完成，返回结果给客户端");
 	}
  
 	@Override
@@ -57,7 +57,7 @@ public class MyAsyncHandlerInterceptor implements AsyncHandlerInterceptor {
 		response.setContentLength(resp.length());
 		response.getOutputStream().write(resp.getBytes());
 		
-		logger.info(Thread.currentThread().getName() + " 进入afterConcurrentHandlingStarted方法");
+		logger.info(Thread.currentThread().getName() + " 异步进入afterConcurrentHandlingStarted方法");
 	}
  
 }
