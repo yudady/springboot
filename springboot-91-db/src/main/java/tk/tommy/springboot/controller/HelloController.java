@@ -32,20 +32,22 @@ public class HelloController {
 	@Autowired
 	ApplicationContext applicationContext;
 
-	LocalDateTime target = LocalDateTime.parse("2018-08-17 22:30:00", formatter);
+	// LocalDateTime target = LocalDateTime.parse("2018-08-17 22:30:00", formatter);
+	// LocalDateTime target = LocalDateTime.parse("2018-08-18 13:00:00", formatter);
 
 	@Autowired
 	RdRepository rdRepository;
 
-	String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-未通知 ➞ 已支付-通知失败' AND order_no LIKE 'M"
-		+ LocalDate.now().toString().replace("-", "") + "%' ORDER BY order_no DESC";
-
-	String sql2 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-未通知 ➞ 已支付-未通知' AND order_no LIKE 'M"
-		+ LocalDate.now().toString().replace("-", "") + "%' ORDER BY order_no DESC";
-
 	@RequestMapping(value = "/")
 	public @ResponseBody String index() throws IOException {
 
+		LocalDateTime target = LocalDateTime.now().plusHours(-2);
+
+		String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-未通知 ➞ 已支付-通知失败' AND order_no LIKE 'M"
+			+ LocalDate.now().toString().replace("-", "") + "%' ORDER BY order_no DESC";
+
+		String sql2 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-未通知 ➞ 已支付-未通知' AND order_no LIKE 'M"
+			+ LocalDate.now().toString().replace("-", "") + "%' ORDER BY order_no DESC";
 		StringBuffer msgs = new StringBuffer();
 
 		Map<String, JdbcTemplate> its = DbManager.getAll();
