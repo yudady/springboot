@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tk.tommy.springboot.dao.RdRepository;
-import tk.tommy.springboot.vo.DbManager;
+import tk.tommy.springboot.vo.MyPayManager;
 
 @RestController
 public class HelloController {
@@ -38,24 +38,34 @@ public class HelloController {
 	@Autowired
 	RdRepository rdRepository;
 
+	String sql2Msg = "已支付-通知中 ➞ 已支付-通知中";
+	String sql1Msg = "已支付-通知失败 ➞ 已支付-通知成功";
+	String sql3Msg = "已支付-通知中 ➞ 已支付-通知失败";
+
 	@RequestMapping(value = "/")
 	public @ResponseBody String index() throws IOException {
 
-		LocalDateTime target = LocalDateTime.now().plusHours(-2);
+		LocalDateTime target = LocalDateTime.now().plusMinutes(-15);
+		String searchDate = LocalDate.now().toString().replace("-", "");
 
-		String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-未通知 ➞ 已支付-通知失败' AND order_no LIKE 'M"
-			+ LocalDate.now().toString().replace("-", "") + "%' ORDER BY order_no DESC";
+		String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '" + sql1Msg + "' AND order_no LIKE 'M"
+			+ searchDate + "%' ORDER BY order_no DESC";
 
-		String sql2 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-未通知 ➞ 已支付-未通知' AND order_no LIKE 'M"
-			+ LocalDate.now().toString().replace("-", "") + "%' ORDER BY order_no DESC";
+		String sql2 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '" + sql2Msg + "' AND order_no LIKE 'M"
+			+ searchDate + "%' ORDER BY order_no DESC";
+
+		String sql3 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '" + sql3Msg + "' AND order_no LIKE 'M"
+			+ searchDate + "%' ORDER BY order_no DESC";
+
 		StringBuffer msgs = new StringBuffer();
 
-		Map<String, JdbcTemplate> its = DbManager.getAll();
+		Map<String, JdbcTemplate> its = MyPayManager.getAll();
 		// 已支付-未通知 ➞ 已支付-通知失败
 		its.entrySet().stream().parallel().forEach(pair -> {
 			String custName = pair.getKey();
 			JdbcTemplate jdbcTemplate = pair.getValue();
 			List<Map<String, Object>> pyMypayOrderLogs1 = jdbcTemplate.queryForList(sql1);
+			// msgs.append(sql1Msg).append("<br/>");
 			for (int i = 0; i < pyMypayOrderLogs1.size(); i++) {
 				Map<String, Object> rs = pyMypayOrderLogs1.get(i);
 				String row = custName + " : " + rs.get("ORDER_NO") + " -- " + rs.get("STATUS") + " -- "
@@ -68,9 +78,25 @@ public class HelloController {
 				}
 
 			}
+			// msgs.append(sql2Msg).append("<br/>");
 			List<Map<String, Object>> pyMypayOrderLogs2 = jdbcTemplate.queryForList(sql2);
 			for (int i = 0; i < pyMypayOrderLogs2.size(); i++) {
 				Map<String, Object> rs = pyMypayOrderLogs2.get(i);
+				String row = custName + " : " + rs.get("ORDER_NO") + " -- " + rs.get("STATUS") + " -- "
+					+ rs.get("CREATE_DATE");
+				System.out.println(row);
+				String dd = rs.get("CREATE_DATE").toString().trim().substring(0, 19);
+				LocalDateTime dateTime = LocalDateTime.parse(dd, formatter);
+				if (dateTime.compareTo(target) > 0) {
+					msgs.append(row).append("<br/>");
+				}
+
+			}
+
+			// msgs.append(sql3Msg).append("<br/>");
+			List<Map<String, Object>> pyMypayOrderLogs3 = jdbcTemplate.queryForList(sql3);
+			for (int i = 0; i < pyMypayOrderLogs3.size(); i++) {
+				Map<String, Object> rs = pyMypayOrderLogs3.get(i);
 				String row = custName + " : " + rs.get("ORDER_NO") + " -- " + rs.get("STATUS") + " -- "
 					+ rs.get("CREATE_DATE");
 				System.out.println(row);
