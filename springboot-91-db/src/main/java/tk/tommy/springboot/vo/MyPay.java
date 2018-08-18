@@ -1,20 +1,27 @@
 package tk.tommy.springboot.vo;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
-import java.util.Properties;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 public class MyPay {
+
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private String custName;
 	private Properties configFile;
 	private HikariDataSource hikariDataSource;
 	private JdbcTemplate jdbcTemplate;
+	private PlatformTransactionManager platformTransactionManager;
+	private TransactionTemplate transactionTemplate;
 
-	public MyPay(String custName, String ip, String username, String password){
+	public MyPay(String custName, String ip, String username, String password) {
 		try {
 			this.custName = custName;
 			configFile = new Properties();
@@ -34,16 +41,18 @@ public class MyPay {
 			config.addDataSourceProperty("prepStmtCacheSize", "1000");
 			config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-
-
 			hikariDataSource = new HikariDataSource(config);
 			jdbcTemplate = new JdbcTemplate(hikariDataSource);
+
+			platformTransactionManager = new DataSourceTransactionManager(hikariDataSource);
+			transactionTemplate = new TransactionTemplate(platformTransactionManager);
 			MyPayManager.addOne(this);
 		} catch (Throwable e) {
 			logger.error(custName + " : 资料库设定失败！！！");
 			throw new RuntimeException(e);
 		}
 	}
+
 	public String getCustName() {
 		return custName;
 	}
@@ -74,5 +83,21 @@ public class MyPay {
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	public PlatformTransactionManager getPlatformTransactionManager() {
+		return platformTransactionManager;
+	}
+
+	public void setPlatformTransactionManager(PlatformTransactionManager platformTransactionManager) {
+		this.platformTransactionManager = platformTransactionManager;
+	}
+
+	public TransactionTemplate getTransactionTemplate() {
+		return transactionTemplate;
+	}
+
+	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+		this.transactionTemplate = transactionTemplate;
 	}
 }
