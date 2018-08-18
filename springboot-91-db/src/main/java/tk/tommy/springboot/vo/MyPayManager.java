@@ -6,18 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.transaction.support.TransactionTemplate;
 public class MyPayManager {
 
 	private static Map<String, MyPay> dynamicCustContainers = Collections
 		.synchronizedMap(new LinkedHashMap<>());
 
-	public static JdbcTemplate getByCustName(String custName) {
+	public static JdbcTemplate getJdbcTemplateByCustName(String custName) {
 		return dynamicCustContainers.get(custName).getJdbcTemplate();
-	}
-
-	public static TransactionTemplate getTransactionTemplateByCustName(String custName) {
-		return dynamicCustContainers.get(custName).getTransactionTemplate();
 	}
 
 	public static Map<String, JdbcTemplate> getAll() {

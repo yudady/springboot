@@ -5,9 +5,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -18,8 +15,6 @@ public class MyPay {
 	private Properties configFile;
 	private HikariDataSource hikariDataSource;
 	private JdbcTemplate jdbcTemplate;
-	private PlatformTransactionManager platformTransactionManager;
-	private TransactionTemplate transactionTemplate;
 
 	public MyPay(String custName, String ip, String username, String password) {
 		try {
@@ -44,8 +39,6 @@ public class MyPay {
 			hikariDataSource = new HikariDataSource(config);
 			jdbcTemplate = new JdbcTemplate(hikariDataSource);
 
-			platformTransactionManager = new DataSourceTransactionManager(hikariDataSource);
-			transactionTemplate = new TransactionTemplate(platformTransactionManager);
 			MyPayManager.addOne(this);
 		} catch (Throwable e) {
 			logger.error(custName + " : 资料库设定失败！！！");
@@ -85,19 +78,4 @@ public class MyPay {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	public PlatformTransactionManager getPlatformTransactionManager() {
-		return platformTransactionManager;
-	}
-
-	public void setPlatformTransactionManager(PlatformTransactionManager platformTransactionManager) {
-		this.platformTransactionManager = platformTransactionManager;
-	}
-
-	public TransactionTemplate getTransactionTemplate() {
-		return transactionTemplate;
-	}
-
-	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-		this.transactionTemplate = transactionTemplate;
-	}
 }

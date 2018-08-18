@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -27,20 +28,14 @@ public class MyPayAspect {
 	 * @param pjp
 	 */
 	@Around("execution(* tk.tommy.springboot.service.mypay.**.*(..))")
-	public Object aroundAdvice(ProceedingJoinPoint pjp) {
+	public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
 		Object retVal = null;
 		try {
-			System.out.println("Around--目标方法调用之前执行");
-
-			for (int i = 0; i < pjp.getArgs().length; i++) {
-				System.out.println(pjp.getArgs()[i]);
-			}
 			retVal = pjp.proceed();
-
-			System.out.println("Around--返回值 => " + retVal);
-			System.out.println("Around--目标方法返回后调用");
+			logger.info(pjp.getSignature() + " " + Arrays.deepToString(pjp.getArgs()) + " return " + retVal);
 		} catch (Throwable e) {
-			System.out.println("Around--目标方法抛出异常后调用");
+			logger.error(ExceptionUtils.getStackTrace(e));
+			throw e;
 		}
 		return retVal;
 	}
