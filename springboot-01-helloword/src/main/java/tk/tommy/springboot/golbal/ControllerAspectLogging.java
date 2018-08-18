@@ -13,7 +13,7 @@ public class ControllerAspectLogging {
 
 	final static Logger log = LoggerFactory.getLogger(ControllerAspectLogging.class);
 
-	@Pointcut("execution(* com.tommy.springboot.controller..*.*(..))")
+	@Pointcut("execution(* tk.tommy.springboot.controller..*.*(..))")
 	public void performance() {
 	}
 
