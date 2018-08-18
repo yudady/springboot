@@ -1,12 +1,11 @@
 package tk.tommy.config;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import tk.tommy.bean.MyBean;
-import tk.tommy.bean.MyBean2;
-import tk.tommy.bean.MyBeanFactory;
+import tk.tommy.bean.*;
 @Configuration
 public class MyConfig {
 
@@ -24,6 +23,17 @@ public class MyConfig {
 	@Bean(name = "myBeanFactory", initMethod = "init", destroyMethod = "destroy")
 	public MyBeanFactory myBeanFactory() {
 		return new MyBeanFactory();
+	}
+
+	@Bean
+	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public PrototypeBean prototypeBean(String name, int age) {
+		return new PrototypeBean(name, age);
+	}
+
+	@Bean
+	public SingletonBean singletonBean() {
+		return new SingletonBean();
 	}
 
 }
