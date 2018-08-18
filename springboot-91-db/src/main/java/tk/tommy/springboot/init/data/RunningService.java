@@ -6,21 +6,32 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import tk.tommy.springboot.dao.RdRepository;
-import tk.tommy.springboot.vo.DynamicCustContainer;
+import tk.tommy.springboot.vo.MyPay;
 
 @Service
 @Order(1)
-public class RunningService implements CommandLineRunner {
+public class RunningService implements CommandLineRunner, ApplicationContextAware {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired RdRepository rdRepository;
+	@Autowired
+	RdRepository rdRepository;
+	@Autowired
+	ApplicationContext applicationContext;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -48,7 +59,8 @@ public class RunningService implements CommandLineRunner {
 			String username = map.get("DB_USER").toString();
 			String password = map.get("DB_PWD").toString();
 
-			new DynamicCustContainer(custName, ip, username, password);
+			applicationContext.getBean(MyPay.class, custName, ip, username, password);
+			// new DynamicCustContainer(custName, ip, username, password);
 
 		}
 

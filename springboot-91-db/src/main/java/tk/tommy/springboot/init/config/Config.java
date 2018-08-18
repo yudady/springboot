@@ -7,7 +7,8 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import tk.tommy.springboot.vo.DynamicCustContainer;
+
+import tk.tommy.springboot.vo.MyPay;
 
 @Configuration
 public class Config {
@@ -18,10 +19,10 @@ public class Config {
 		return DataSourceBuilder.create().build();
 	}
 
-//	@Bean
-//	@Scope("prototype")
-//	public DynamicCustContainer dynamicCustContainer() {
-//		return new DynamicCustContainer();
-//	}
+	@Bean
+	@Scope("prototype")
+	public MyPay myPay(String custName, String ip, String username, String password) {
+		return new MyPay(custName, ip, username, password);
+	}
 
 }
