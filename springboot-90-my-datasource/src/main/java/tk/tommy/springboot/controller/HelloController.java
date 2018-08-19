@@ -68,7 +68,7 @@ public class HelloController {
 		{
 			Map<String, Object> propertyValue = new HashMap<>();
 			propertyValue.put("name", "张三");
-			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByValue(User.class, propertyValue);
+			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByValue(User.class, propertyValue,null);
 		}
 
 		{
@@ -76,7 +76,7 @@ public class HelloController {
 			Map<String, String> propertyReference = new HashMap<>();
 			propertyReference.put("user", "user");
 			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByReference(UserService.class,
-				propertyReference);
+				propertyReference,null);
 		}
 
 		System.out.println("index");
@@ -88,7 +88,7 @@ public class HelloController {
 		testService.print();
 
 		//
-		dynamicRegisterBean2SpringContainer.dynamicDeleteBean(User.class);
+		dynamicRegisterBean2SpringContainer.dynamicDeleteBean(User.class,null);
 
 		System.out.println(applicationContext.containsBean("user"));
 

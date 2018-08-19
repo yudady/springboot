@@ -1,4 +1,4 @@
-package tk.tommy.springboot.dynamic;
+package tk.tommy.springboot.init.config;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -20,8 +20,16 @@ public class DynamicRegisterBean2SpringContainer {
 	@Autowired
 	ApplicationContext applicationContext;
 
-	public static String getCamelCase(Class clazz) {
-		return clazz.getSimpleName().substring(0, 1).toLowerCase() + clazz.getSimpleName().substring(1);
+	public static String getCamelCase(Class clazz, String refer) {
+		String re = clazz.getSimpleName().substring(0, 1).toLowerCase() + clazz.getSimpleName().substring(1)
+			+ refer;
+
+		System.out.println(re);
+		return re;
+	}
+
+	public void dynamicCreateBean(Class clazz, String refer) {
+		dynamicCreateBean(clazz, null, null, refer);
 	}
 
 	public void dynamicCreateBeanByValue(Class clazz, Map<String, Object> propertyValue, String refer) {
@@ -36,9 +44,6 @@ public class DynamicRegisterBean2SpringContainer {
 	public void dynamicCreateBean(Class clazz, Map<String, Object> propertyValue,
 		Map<String, String> propertyReference, String refer) {
 
-		if (Objects.isNull(refer)) {
-			refer = "";
-		}
 		// 获取context.
 
 		// 获取BeanFactory
@@ -75,22 +80,20 @@ public class DynamicRegisterBean2SpringContainer {
 		}
 
 		// 动态注册bean.
-		defaultListableBeanFactory.registerBeanDefinition(getCamelCase(clazz) + refer,
+		defaultListableBeanFactory.registerBeanDefinition(getCamelCase(clazz, refer),
 			beanDefinitionBuilder.getBeanDefinition());
 
 	}
 
 	public void dynamicDeleteBean(Class clazz, String refer) {
 		// 获取context
-		if (Objects.isNull(refer)) {
-			refer = "";
-		}
+
 		// 获取BeanFactory
 		DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) applicationContext
 			.getAutowireCapableBeanFactory();
 
 		// 删除bean.
-		defaultListableBeanFactory.removeBeanDefinition(getCamelCase(clazz) + refer);
+		defaultListableBeanFactory.removeBeanDefinition(getCamelCase(clazz, refer));
 	}
 
 }
