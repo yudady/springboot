@@ -4,40 +4,56 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-public class MyPay {
+public class MyPay implements ApplicationContextAware {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	ApplicationContext applicationContext;
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
+
 	private String custName;
-	private Properties configFile;
 	private HikariDataSource hikariDataSource;
 	private JdbcTemplate jdbcTemplate;
 
 	public MyPay(String custName, String ip, String username, String password) {
 		try {
 			this.custName = custName;
-			configFile = new Properties();
-			configFile.setProperty("driverClassName", "oracle.jdbc.OracleDriver");
-			configFile.setProperty("jdbcUrl", "jdbc:oracle:thin:@" + ip + ":1521:mypay");
-			configFile.setProperty("username", username);
-			configFile.setProperty("password", password);
-			configFile.setProperty("connectionTimeout", "1000");
-			configFile.setProperty("connectionTestQuery", "select sysdate from dual");
-			HikariConfig config = new HikariConfig(configFile);
-			config.setConnectionTimeout(10 * 1000);
-			config.setIdleTimeout(30 * 1000);
-			config.setMaxLifetime(60 * 1000);
-			config.setMinimumIdle(3);
-			config.setMaximumPoolSize(10);
-			config.addDataSourceProperty("cachePrepStmts", "true");
-			config.addDataSourceProperty("prepStmtCacheSize", "1000");
-			config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+			Properties properties = new Properties();
+			properties.setProperty("driverClassName", "oracle.jdbc.OracleDriver");
+			properties.setProperty("jdbcUrl", "jdbc:oracle:thin:@" + ip + ":1521:mypay");
+			properties.setProperty("username", username);
+			properties.setProperty("password", password);
+			properties.setProperty("connectionTimeout", "1000");
+			properties.setProperty("connectionTestQuery", "select sysdate from dual");
 
-			hikariDataSource = new HikariDataSource(config);
-			jdbcTemplate = new JdbcTemplate(hikariDataSource);
+			HikariConfig hikariConfig = applicationContext.getBean(HikariConfig.class, properties);
+			hikariConfig.setConnectionTimeout(10 * 1000);
+			hikariConfig.setIdleTimeout(30 * 1000);
+			hikariConfig.setMaxLifetime(60 * 1000);
+			hikariConfig.setMinimumIdle(3);
+			hikariConfig.setMaximumPoolSize(10);
+			hikariConfig.addDataSourceProperty("cachePrepStmts", "true");
+			hikariConfig.addDataSourceProperty("prepStmtCacheSize", "1000");
+			hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
+			hikariDataSource = applicationContext.getBean(HikariDataSource.class, hikariConfig);
+
+			hikariDataSource = new HikariDataSource(hikariConfig);
+
+			jdbcTemplate = applicationContext.getBean(JdbcTemplate.class, hikariDataSource);
 
 			MyPayManager.addOne(this);
 		} catch (Throwable e) {
@@ -46,20 +62,16 @@ public class MyPay {
 		}
 	}
 
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
 	public String getCustName() {
 		return custName;
 	}
 
 	public void setCustName(String custName) {
 		this.custName = custName;
-	}
-
-	public Properties getConfigFile() {
-		return configFile;
-	}
-
-	public void setConfigFile(Properties configFile) {
-		this.configFile = configFile;
 	}
 
 	public HikariDataSource getHikariDataSource() {
@@ -77,5 +89,4 @@ public class MyPay {
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-
 }
