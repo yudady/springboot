@@ -3,19 +3,22 @@ package tk.tommy.springboot.service.mypay;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import tk.tommy.springboot.vo.MyPayManager;
-
 @Service
 public class OrderLogService {
+
+	@Autowired
+	MyPayService myPayService;
 
 	public String getPyMyPayOrderLog(String custName) {
 		String authorizationCode = null;
 		Connection connection = null;
 		try {
-			JdbcTemplate jdbcTemplate = MyPayManager.getJdbcTemplateByCustName(custName);
+
+			JdbcTemplate jdbcTemplate = myPayService.getJdbcTemplateByCustName(custName);
 			connection = jdbcTemplate.getDataSource().getConnection();
 			connection.setAutoCommit(false);
 			authorizationCode = jdbcTemplate.queryForObject(

@@ -1,6 +1,9 @@
 package tk.tommy.springboot.vo;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
@@ -9,9 +12,17 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.jdbc.datasource.DataSourceUtils;
+
+/**
+ * 处理connection
+ * 
+ */
 public class MyPay {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	ThreadLocal<Connection> ThreadLocalConnection = new ThreadLocal<>();
 
 	private String custName;
 	private String ip;
@@ -47,8 +58,25 @@ public class MyPay {
 
 		jdbcTemplate = new JdbcTemplate(hikariDataSource);
 
-		MyPayManager.addOne(this);
 		logger.debug(this.custName + " " + ToStringBuilder.reflectionToString(this));
+	}
+
+	public Connection getConnection(boolean autoCommit) throws SQLException {
+		Connection connection = DataSourceUtils.getConnection(hikariDataSource);
+		connection.setAutoCommit(autoCommit);
+		ThreadLocalConnection.set(connection);
+		return connection;
+	}
+
+
+	
+	public void destoryMethod() throws InterruptedException {
+
+		while (!hikariDataSource.isClosed()) {
+			TimeUnit.SECONDS.sleep(1);
+			hikariDataSource.close();
+		}
+
 	}
 
 	public String getCustName() {

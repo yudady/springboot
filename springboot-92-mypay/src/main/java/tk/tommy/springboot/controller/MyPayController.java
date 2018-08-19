@@ -15,16 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import tk.tommy.springboot.dynamic.DynamicRegisterBean2SpringContainer;
+import tk.tommy.springboot.service.mypay.MyPayService;
 import tk.tommy.springboot.service.mypay.OrderLogService;
 import tk.tommy.springboot.vo.MyPay;
-import tk.tommy.springboot.vo.MyPayManager;
-
-import javax.sql.DataSource;
 
 @RestController
 public class MyPayController {
@@ -37,6 +32,9 @@ public class MyPayController {
 	OrderLogService orderLogService;
 	@Autowired
 	ApplicationContext applicationContext;
+
+	@Autowired
+	MyPayService myPayService;
 
 	// LocalDateTime target = LocalDateTime.parse("2018-08-17 22:30:00", formatter);
 	// LocalDateTime target = LocalDateTime.parse("2018-08-18 13:00:00", formatter);
@@ -62,7 +60,7 @@ public class MyPayController {
 
 		StringBuffer msgs = new StringBuffer();
 
-		Map<String, JdbcTemplate> its = MyPayManager.getAll();
+		Map<String, MyPay> its = myPayService.getAll();
 		// 已支付-未通知 ➞ 已支付-通知失败
 		its.entrySet().stream().parallel().forEach(pair -> {
 
@@ -70,8 +68,8 @@ public class MyPayController {
 				String custName = pair.getKey();
 
 				orderLogService.getPyMyPayOrderLog(custName);
-
-				JdbcTemplate jdbcTemplate = pair.getValue();
+				MyPay mp = pair.getValue();
+				JdbcTemplate jdbcTemplate = mp.getJdbcTemplate();
 				List<Map<String, Object>> pyMypayOrderLogs1 = jdbcTemplate.queryForList(sql1);
 				// msgs.append(sql1Msg).append("<br/>");
 				for (int i = 0; i < pyMypayOrderLogs1.size(); i++) {
@@ -132,17 +130,11 @@ public class MyPayController {
 		return msgs.toString();
 	}
 
-	@RequestMapping(value = "/db")
-	public @ResponseBody String db() throws IOException {
-		MyPay bean = (MyPay) applicationContext
-			.getBean(DynamicRegisterBean2SpringContainer.getCamelCase(MyPay.class, "001"));
+	@GetMapping(value = "/db/{custName}")
+	public @ResponseBody String db(@PathVariable String custName) throws IOException {
+		MyPay bean = applicationContext.getBean("myPay" + custName, MyPay.class);
 
-		System.out.println(bean.getCustName());
-
-		DataSource dataSource = bean.getJdbcTemplate().getDataSource();
-		System.out.println();
-
-		return bean.getCustName() + dataSource;
+		return bean.getCustName() + "  " + bean.getHikariDataSource();
 	}
 
 }
