@@ -39,7 +39,7 @@ public class MyPay implements ApplicationContextAware {
 			properties.setProperty("connectionTimeout", "1000");
 			properties.setProperty("connectionTestQuery", "select sysdate from dual");
 
-			HikariConfig hikariConfig = applicationContext.getBean(HikariConfig.class, properties);
+			HikariConfig hikariConfig = new HikariConfig(properties);
 			hikariConfig.setConnectionTimeout(10 * 1000);
 			hikariConfig.setIdleTimeout(30 * 1000);
 			hikariConfig.setMaxLifetime(60 * 1000);
@@ -49,11 +49,11 @@ public class MyPay implements ApplicationContextAware {
 			hikariConfig.addDataSourceProperty("prepStmtCacheSize", "1000");
 			hikariConfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-			hikariDataSource = applicationContext.getBean(HikariDataSource.class, hikariConfig);
+			hikariDataSource = new HikariDataSource(hikariConfig);
 
 			hikariDataSource = new HikariDataSource(hikariConfig);
 
-			jdbcTemplate = applicationContext.getBean(JdbcTemplate.class, hikariDataSource);
+			jdbcTemplate = new JdbcTemplate(hikariDataSource);
 
 			MyPayManager.addOne(this);
 		} catch (Throwable e) {
