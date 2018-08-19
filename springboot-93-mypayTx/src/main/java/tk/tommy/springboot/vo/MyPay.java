@@ -42,7 +42,7 @@ public class MyPay {
 
 		properties = new Properties();
 		properties.setProperty("driverClassName", "oracle.jdbc.OracleDriver");
-		properties.setProperty("jdbcUrl", "jdbc:oracle:thin:@" + ip + ":1521:mypay");
+		properties.setProperty("jdbcUrl", "jdbc:oracle:thin:@" + ip + ":1521:zvo11g01");
 		properties.setProperty("username", username);
 		properties.setProperty("password", password);
 		properties.setProperty("connectionTimeout", "1000");

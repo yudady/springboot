@@ -50,15 +50,16 @@ public class RunningService implements CommandLineRunner {
 				ip = "35.185.147.170";
 			}
 
-			String custName = map.get("NAME").toString();
-			String username = map.get("DB_USER").toString();
-			String password = map.get("DB_PWD").toString();
+			String custName = map.get("NAME").toString().trim();
+			String username = map.get("DB_USER").toString().trim();
+			String password = map.get("DB_PWD").toString().trim();
+			String ipp = map.get("DB_HOST").toString().trim();
 
 			Map<String, Object> propertyValue = new HashMap<>();
 			propertyValue.put("custName", custName);
 			propertyValue.put("username", username);
 			propertyValue.put("password", password);
-			propertyValue.put("ip", ip);
+			propertyValue.put("ip", "192.168.0.23");
 			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByValue(MyPay.class, propertyValue,
 				custName);
 

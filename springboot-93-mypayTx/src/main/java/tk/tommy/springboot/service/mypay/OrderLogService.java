@@ -44,28 +44,30 @@ public class OrderLogService {
 		return authorizationCode;
 	}
 
-
-	public void test01(String custName){
-		String sql = "SELECT count(*) FROM PY_SYSTEM_CONFIG";
+	public void test01(String custName) {
+		String sql = "SELECT count(*) FROM PY_USER";
+		String sql2 = "update PY_USER set descr = '123' where id =  481";
+		String sql3 = "update PY_USER set desdfdscr = 'tommy' where id = 481 ";
 
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-		//事务状态类，通过PlatformTransactionManager的getTransaction方法根据事务定义获取；获取事务状态后，Spring根据传播行为来决定如何开启事务
+		// 事务状态类，通过PlatformTransactionManager的getTransaction方法根据事务定义获取；获取事务状态后，Spring根据传播行为来决定如何开启事务
 		JdbcTemplate jdbcTemplate = myPayService.getJdbcTemplateByCustName(custName);
 		PlatformTransactionManager txManager = myPayService.getPlatformTransactionManager(custName);
 		TransactionStatus status = txManager.getTransaction(def);
-
-
-		int i = jdbcTemplate.queryForObject(sql,Integer.class);
-		System.out.println("表中记录总数："+i);
+		int i = jdbcTemplate.queryForObject(sql, Integer.class);
+		System.out.println("表中记录总数：" + i);
 		try {
-			jdbcTemplate.update(sql, "1");
-			txManager.commit(status);  //提交status中绑定的事务
+			jdbcTemplate.update(sql2);
+			jdbcTemplate.update(sql3);
+
+			txManager.commit(status); // 提交status中绑定的事务
 		} catch (RuntimeException e) {
-			txManager.rollback(status);  //回滚
+			txManager.rollback(status); // 回滚
+			e.printStackTrace();
 		}
-		i = jdbcTemplate.queryForObject(sql,Integer.class);
-		System.out.println("表中记录总数："+i);
+		i = jdbcTemplate.queryForObject(sql, Integer.class);
+		System.out.println("表中记录总数：" + i);
 	}
 }
