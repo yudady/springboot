@@ -49,9 +49,9 @@ public class MyPayAspect {
 		Method method = signature.getMethod(); // 获取被拦截的方法
 		String methodName = method.getName(); // 获取被拦截的方法名
 
-		logger.info("requset method name is: " + methodName);
-		logger.info("request URL is: " + request.getRequestURL().toString());
-		logger.info("request http method: " + request.getMethod());
-		logger.info("request arguments are: " + Arrays.toString(pjp.getArgs()));
+		logger.debug("requset method name is: " + methodName);
+		logger.debug("request URL is: " + request.getRequestURL().toString());
+		logger.debug("request http method: " + request.getMethod());
+		logger.debug("request arguments are: " + Arrays.toString(pjp.getArgs()));
 	}
 }

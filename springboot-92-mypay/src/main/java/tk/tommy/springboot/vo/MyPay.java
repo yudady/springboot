@@ -13,9 +13,6 @@ public class MyPay {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	// @Autowired
-	// ApplicationContext applicationContext;
-
 	private String custName;
 	private String ip;
 	private String username;
@@ -24,24 +21,6 @@ public class MyPay {
 	private JdbcTemplate jdbcTemplate;
 	private Properties properties;
 	private HikariConfig hikariConfig;
-
-	// public MyPay(String custName, String ip, String username, String password) {
-	// try {
-	// this.custName = custName;
-	// this.ip = ip;
-	// this.username = username;
-	// this.password = password;
-	//
-	//
-	//
-	//
-	//// dynamicRegisterBean2SpringContainer.dynamicCreateBean(this.getClass(),
-	// custName);
-	// } catch (Throwable e) {
-	// logger.error(custName + " : 资料库设定失败！！！");
-	// throw new RuntimeException(e);
-	// }
-	// }
 
 	public void initMethod() {
 

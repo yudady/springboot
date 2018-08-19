@@ -7,21 +7,10 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-//@Component
 public class MyPayManager {
 
 	private static Map<String, MyPay> dynamicCustContainers = Collections
 		.synchronizedMap(new LinkedHashMap<>());
-
-	public static void init() {
-		dynamicCustContainers.entrySet().stream().parallel().forEach(pair -> {
-			String key = pair.getKey();
-			MyPay value = pair.getValue();
-
-			value.initMethod();
-
-		});
-	}
 
 	public static JdbcTemplate getJdbcTemplateByCustName(String custName) {
 		return dynamicCustContainers.get(custName).getJdbcTemplate();

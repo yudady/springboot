@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tk.tommy.springboot.dao.RdRepository;
+import tk.tommy.springboot.service.rd.RdService;
 
 @RestController
 public class RdController {
@@ -19,13 +19,13 @@ public class RdController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	RdRepository rdRepository;
+	RdService rdService;
 
 	@RequestMapping(value = "/count")
 	public @ResponseBody String count() throws IOException {
 
-		List<Map<String, Object>> notYetNotifyOrder = rdRepository.queryForListPyNotYetNotifyOrder();
-		List<Map<String, Object>> failOrder = rdRepository.queryForListPyNotifyFailOrder();
+		List<Map<String, Object>> notYetNotifyOrder = rdService.queryForListPyNotYetNotifyOrder();
+		List<Map<String, Object>> failOrder = rdService.queryForListPyNotifyFailOrder();
 
 		System.out.println(notYetNotifyOrder.size());
 		System.out.println(failOrder.size());
@@ -36,7 +36,7 @@ public class RdController {
 	@RequestMapping(value = "/orders")
 	public @ResponseBody String orderAll() throws IOException {
 
-		List<Map<String, Object>> orders = rdRepository.queryForListPyOrder();
+		List<Map<String, Object>> orders = rdService.queryForListPyOrder();
 
 		return "orders : " + orders.size();
 	}

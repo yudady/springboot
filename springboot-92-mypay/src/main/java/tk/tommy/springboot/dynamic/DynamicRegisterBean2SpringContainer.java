@@ -1,4 +1,4 @@
-package tk.tommy.springboot.init.config;
+package tk.tommy.springboot.dynamic;
 
 import java.util.Iterator;
 import java.util.Map;

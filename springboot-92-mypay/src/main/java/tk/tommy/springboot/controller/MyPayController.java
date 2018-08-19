@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import tk.tommy.springboot.init.config.DynamicRegisterBean2SpringContainer;
+import tk.tommy.springboot.dynamic.DynamicRegisterBean2SpringContainer;
 import tk.tommy.springboot.service.mypay.OrderLogService;
 import tk.tommy.springboot.vo.MyPay;
 import tk.tommy.springboot.vo.MyPayManager;

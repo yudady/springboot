@@ -1,4 +1,4 @@
-package tk.tommy.springboot.init.data;
+package tk.tommy.springboot.dynamic;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,36 +7,26 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import tk.tommy.springboot.dao.RdRepository;
-import tk.tommy.springboot.init.config.DynamicRegisterBean2SpringContainer;
+import tk.tommy.springboot.dynamic.DynamicRegisterBean2SpringContainer;
 import tk.tommy.springboot.vo.MyPay;
 
 @Service
 @Order(1)
-public class RunningService implements CommandLineRunner, ApplicationContextAware {
+public class RunningService implements CommandLineRunner {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	RdRepository rdRepository;
-	@Autowired
-	ApplicationContext applicationContext;
 
 	@Autowired
 	DynamicRegisterBean2SpringContainer dynamicRegisterBean2SpringContainer;
-
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -64,17 +54,14 @@ public class RunningService implements CommandLineRunner, ApplicationContextAwar
 			String username = map.get("DB_USER").toString();
 			String password = map.get("DB_PWD").toString();
 
-			// applicationContext.getBean(MyPay.class, custName, ip, username, password);
-			// new DynamicCustContainer(custName, ip, username, password);
-//			dynamicRegisterBean2SpringContainer.dynamicCreateBean(MyPay.class,custName);
 			Map<String, Object> propertyValue = new HashMap<>();
 			propertyValue.put("custName", custName);
 			propertyValue.put("username", username);
 			propertyValue.put("password", password);
 			propertyValue.put("ip", ip);
-			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByValue(MyPay.class, propertyValue,custName);
-//			MyPay myPay = (MyPay) applicationContext.getBean(MyPay.class,custName);
-//			System.out.println(myPay);
+			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByValue(MyPay.class, propertyValue,
+				custName);
+
 		}
 
 	}
