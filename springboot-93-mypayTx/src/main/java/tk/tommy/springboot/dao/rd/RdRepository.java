@@ -35,4 +35,13 @@ public class RdRepository {
 		return jdbcTemplate.queryForList(sql);
 	}
 
+	public int rdFail() {
+		String sql = " UPDATE FAIL_SQL SET n = '123' WHERE TG";
+		return jdbcTemplate.update(sql);
+	}
+
+	public Integer rdOk() {
+		String sql = " UPDATE PY_USER SET DESCR = 'zonvan123' WHERE id = 1";
+		return jdbcTemplate.update(sql);
+	}
 }

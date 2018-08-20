@@ -40,4 +40,16 @@ public class RdController {
 
 		return "orders : " + orders.size();
 	}
+
+	@RequestMapping(value = "/rd/ok")
+	public @ResponseBody Integer rdOk() throws IOException {
+
+		return rdService.rdOk();
+	}
+	@RequestMapping(value = "/rd/fail")
+	public @ResponseBody Integer rdFail() throws IOException {
+
+		return rdService.rdFail();
+	}
+
 }
