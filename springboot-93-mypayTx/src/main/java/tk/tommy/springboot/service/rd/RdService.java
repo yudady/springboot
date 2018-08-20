@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tk.tommy.springboot.dao.RdRepository;
+import tk.tommy.springboot.dao.rd.RdRepository;
 @Service
 public class RdService {
 

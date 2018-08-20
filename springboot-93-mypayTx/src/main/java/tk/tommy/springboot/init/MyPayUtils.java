@@ -8,10 +8,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import tk.tommy.springboot.vo.MyPay;
+import tk.tommy.springboot.common.MyPay;
 
 @Component
-public class MyPayService {
+public class MyPayUtils {
 
 	@Autowired
 	ApplicationContext applicationContext;

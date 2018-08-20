@@ -1,4 +1,4 @@
-package tk.tommy.springboot.dynamic;
+package tk.tommy.springboot.common;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
-import tk.tommy.springboot.dao.RdRepository;
-import tk.tommy.springboot.dynamic.DynamicRegisterBean2SpringContainer;
-import tk.tommy.springboot.vo.MyPay;
+import tk.tommy.springboot.dao.rd.RdRepository;
 
 @Service
 @Order(1)
@@ -25,8 +23,7 @@ public class RunningService implements CommandLineRunner {
 	@Autowired
 	RdRepository rdRepository;
 
-	@Autowired
-	DynamicRegisterBean2SpringContainer dynamicRegisterBean2SpringContainer;
+	@Autowired DynamicRegisterBean2SpringContainer dynamicRegisterBean2SpringContainer;
 
 	@Override
 	public void run(String... strings) throws Exception {

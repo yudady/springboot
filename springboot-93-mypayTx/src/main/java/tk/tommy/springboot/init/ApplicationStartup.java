@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
-import tk.tommy.springboot.vo.MyPay;
+import tk.tommy.springboot.common.MyPay;
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 

@@ -1,4 +1,4 @@
-package tk.tommy.springboot.vo;
+package tk.tommy.springboot.common;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package tk.tommy.springboot.aop.service;
+package tk.tommy.springboot.aop.service.mypay;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import tk.tommy.springboot.init.MyPayService;
+import tk.tommy.springboot.init.MyPayUtils;
 
 @Aspect
 @Component
@@ -29,8 +29,7 @@ public class MyPayAspect {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	MyPayService myPayService;
+	@Autowired MyPayUtils myPayUtils;
 
 	/**
 	 * 环绕通知，可以在目标方法调用前后，自定义执行内容。可以修改目标方法的返回值
@@ -63,7 +62,7 @@ public class MyPayAspect {
 				def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 				// 事务状态类，通过PlatformTransactionManager的getTransaction方法根据事务定义获取；获取事务状态后，Spring根据传播行为来决定如何开启事务
 
-				txManager = myPayService.getPlatformTransactionManager(custName);
+				txManager = myPayUtils.getPlatformTransactionManager(custName);
 				status = txManager.getTransaction(def);
 			}
 

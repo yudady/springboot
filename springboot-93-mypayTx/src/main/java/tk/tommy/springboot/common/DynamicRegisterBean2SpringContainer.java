@@ -1,4 +1,4 @@
-package tk.tommy.springboot.dynamic;
+package tk.tommy.springboot.common;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class DynamicRegisterBean2SpringContainer {
 		String re = clazz.getSimpleName().substring(0, 1).toLowerCase() + clazz.getSimpleName().substring(1)
 			+ refer;
 
-		System.out.println(re);
+		// System.out.println(re);
 		return re;
 	}
 

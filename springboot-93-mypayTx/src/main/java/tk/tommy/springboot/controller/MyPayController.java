@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
-import tk.tommy.springboot.init.MyPayService;
+import tk.tommy.springboot.init.MyPayUtils;
 import tk.tommy.springboot.service.mypay.OrderLogService;
-import tk.tommy.springboot.vo.MyPay;
+import tk.tommy.springboot.common.MyPay;
 
 @RestController
 public class MyPayController {
@@ -28,13 +28,12 @@ public class MyPayController {
 	@Autowired
 	ApplicationContext applicationContext;
 
-	@Autowired
-	MyPayService myPayService;
+	@Autowired MyPayUtils myPayUtils;
 
 	@RequestMapping(value = "/")
 	public @ResponseBody List<String> index() throws IOException {
 
-		Map<String, MyPay> its = myPayService.getAll();
+		Map<String, MyPay> its = myPayUtils.getAll();
 		// 已支付-未通知 ➞ 已支付-通知失败
 		List<String> collect = its.entrySet().stream().parallel().map(pair -> {
 
@@ -52,7 +51,7 @@ public class MyPayController {
 		return collect;
 	}
 
-	@GetMapping(value = "/db/{num}")
+	@GetMapping(value = "/db/fail/{num}")
 	public @ResponseBody String db(@PathVariable String num) throws IOException {
 
 		String custName = "myPay" + num;
