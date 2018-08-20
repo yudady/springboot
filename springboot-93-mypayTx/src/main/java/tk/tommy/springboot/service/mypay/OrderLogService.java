@@ -2,6 +2,8 @@ package tk.tommy.springboot.service.mypay;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -45,9 +47,24 @@ public class OrderLogService {
 	}
 
 	public void test01(String custName) {
+
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
+		//TODO AOP
 		String sql = "SELECT count(*) FROM PY_USER";
-		String sql2 = "update PY_USER set descr = '123' where id =  481";
-		String sql3 = "update PY_USER set desdfdscr = 'tommy' where id = 481 ";
+		String sql2 = "update PY_USER set descr = 'tf' where id =  481";
+		String sql3 = "SELECT * FROM PY_USER where id = 481 ";
 
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
@@ -67,7 +84,7 @@ public class OrderLogService {
 			txManager.rollback(status); // 回滚
 			e.printStackTrace();
 		}
-		i = jdbcTemplate.queryForObject(sql, Integer.class);
-		System.out.println("表中记录总数：" + i);
+		Map<String, Object> map = jdbcTemplate.queryForMap(sql3);
+		System.out.println("481：" + map);
 	}
 }

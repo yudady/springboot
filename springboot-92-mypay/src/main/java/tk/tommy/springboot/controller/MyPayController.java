@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import tk.tommy.springboot.service.mypay.MyPayService;
 import tk.tommy.springboot.service.mypay.OrderLogService;
@@ -30,23 +33,74 @@ public class MyPayController {
 
 	@Autowired
 	OrderLogService orderLogService;
+
 	@Autowired
 	ApplicationContext applicationContext;
 
 	@Autowired
 	MyPayService myPayService;
 
-	// LocalDateTime target = LocalDateTime.parse("2018-08-17 22:30:00", formatter);
-	// LocalDateTime target = LocalDateTime.parse("2018-08-18 13:00:00", formatter);
-
 	String sql2Msg = "已支付-通知中 ➞ 已支付-通知中";
 	String sql1Msg = "已支付-通知失败 ➞ 已支付-通知成功";
 	String sql3Msg = "已支付-通知中 ➞ 已支付-通知失败";
 
-	@RequestMapping(value = "/")
+	public Object revertTreeMap(Map map) {
+		TreeMap<Object, Object> tMap = new TreeMap<>(Collections.reverseOrder());
+		tMap.putAll(map);
+		return tMap;
+	}
+
+	/**
+	 * 今天
+	 * @param custName
+	 * @return
+	 * @throws IOException
+	 */
+	@GetMapping(value = "/db/today/{custName}")
+	public @ResponseBody Object db2(@PathVariable String custName) throws IOException {
+		MyPay myPay = applicationContext.getBean("myPay" + custName, MyPay.class);
+
+		JdbcTemplate jdbcTemplate = myPay.getJdbcTemplate();
+		String searchDate = LocalDate.now().toString().replace("-", "");
+		String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE order_no LIKE 'M" + searchDate + "%' ";
+
+		Map<Object, List<Map<String, Object>>> order_no = jdbcTemplate.queryForList(sql1).stream()
+			.collect(Collectors.groupingBy(x -> x.get("ORDER_NO"))).entrySet().stream().filter(m -> {
+				return m.getValue().stream().anyMatch(m2 -> {
+					if (Objects.isNull(m2.get("REMARK"))) {
+						m2.put("REMARK", "");
+					}
+					return m2.get("REMARK").toString().contains("第1次执行回调");
+				});
+
+			}).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		System.out.println(myPay.getCustName() + " => " + searchDate + " => " + order_no.size());
+
+		return revertTreeMap(order_no);
+	}
+
+	@GetMapping(value = "/db/{custName}")
+	public @ResponseBody Object db(@PathVariable String custName) throws IOException {
+		MyPay myPay = applicationContext.getBean("myPay" + custName, MyPay.class);
+
+		JdbcTemplate jdbcTemplate = myPay.getJdbcTemplate();
+		String searchDate = LocalDate.now().toString().replace("-", "");
+		String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '已支付-通知中 ➞ 已支付-通知中' AND order_no LIKE 'M"
+			+ searchDate + "%' ORDER BY order_no,create_date DESC";
+
+		Map<Object, List<Map<String, Object>>> order_no = jdbcTemplate.queryForList(sql1).stream()
+			.collect(Collectors.groupingBy(x -> x.get("ORDER_NO")));
+		System.out.println(myPay.getCustName() + " => " + searchDate + " => " + order_no.size());
+
+		return revertTreeMap(order_no);
+	}
+
+	@GetMapping(value = "/")
 	public @ResponseBody String index() throws IOException {
 
-		LocalDateTime target = LocalDateTime.now().plusMinutes(-15);
+		// LocalDateTime target = LocalDateTime.now().plusMinutes(-15);
+		LocalDateTime target = LocalDateTime.now().plusHours(-2);
 		String searchDate = LocalDate.now().toString().replace("-", "");
 
 		String sql1 = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE status = '" + sql1Msg + "' AND order_no LIKE 'M"
@@ -128,13 +182,6 @@ public class MyPayController {
 			msgs.append("no data").append("  -----  JdbcTemplate.size() " + its.size());
 		}
 		return msgs.toString();
-	}
-
-	@GetMapping(value = "/db/{custName}")
-	public @ResponseBody String db(@PathVariable String custName) throws IOException {
-		MyPay bean = applicationContext.getBean("myPay" + custName, MyPay.class);
-
-		return bean.getCustName() + "  " + bean.getHikariDataSource();
 	}
 
 }
