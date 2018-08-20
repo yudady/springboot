@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import tk.tommy.springboot.service.rd.RdService;
 
 @RestController
+@Api(tags = "MyPayCenter管理")
 public class RdController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

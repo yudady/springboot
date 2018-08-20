@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import tk.tommy.springboot.service.mypay.MyPayService;
 import tk.tommy.springboot.service.mypay.OrderLogService;
 import tk.tommy.springboot.vo.MyPay;
 
 @RestController
+@Api(tags = "MyPay管理")
 public class MyPayController {
 
 	public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -51,12 +55,13 @@ public class MyPayController {
 	}
 
 	/**
-	 * 今天
 	 * @param custName
 	 * @return
 	 * @throws IOException
 	 */
 	@GetMapping(value = "/db/today/{custName}")
+	@ApiOperation("查询今天有发生-第1次执行回调-")
+	@ApiImplicitParam(name = "custName", value = "用户编号", required = true, dataType = "int", paramType = "path")
 	public @ResponseBody Object db2(@PathVariable String custName) throws IOException {
 		MyPay myPay = applicationContext.getBean("myPay" + custName, MyPay.class);
 
