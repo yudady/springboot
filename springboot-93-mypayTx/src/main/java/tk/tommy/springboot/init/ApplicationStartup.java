@@ -1,4 +1,4 @@
-package tk.tommy.springboot.init.config;
+package tk.tommy.springboot.init;
 
 import java.util.stream.Stream;
 

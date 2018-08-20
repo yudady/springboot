@@ -1,4 +1,4 @@
-package tk.tommy.springboot.service.mypay;
+package tk.tommy.springboot.init;
 
 import java.util.Map;
 
