@@ -8,6 +8,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
@@ -20,10 +21,14 @@ public class RunningService implements CommandLineRunner {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	@Value("${oracle.sid}")
+	private String sid;
+
 	@Autowired
 	RdRepository rdRepository;
 
-	@Autowired DynamicRegisterBean2SpringContainer dynamicRegisterBean2SpringContainer;
+	@Autowired
+	DynamicRegisterBean2SpringContainer dynamicRegisterBean2SpringContainer;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -47,16 +52,20 @@ public class RunningService implements CommandLineRunner {
 				ip = "35.185.147.170";
 			}
 
+			if (sid.equalsIgnoreCase("zvo11g01")) {
+				ip = "192.168.0.23";
+			}
+
 			String custName = map.get("NAME").toString().trim();
 			String username = map.get("DB_USER").toString().trim();
 			String password = map.get("DB_PWD").toString().trim();
-			String ipp = map.get("DB_HOST").toString().trim();
 
 			Map<String, Object> propertyValue = new HashMap<>();
 			propertyValue.put("custName", custName);
 			propertyValue.put("username", username);
 			propertyValue.put("password", password);
-			propertyValue.put("ip", "192.168.0.23");
+			propertyValue.put("ip", ip);
+			propertyValue.put("sid", sid);
 			dynamicRegisterBean2SpringContainer.dynamicCreateBeanByValue(MyPay.class, propertyValue,
 				custName);
 

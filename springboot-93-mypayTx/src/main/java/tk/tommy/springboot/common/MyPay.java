@@ -32,6 +32,8 @@ public class MyPay {
 	private String ip;
 	private String username;
 	private String password;
+	private String sid;
+
 	private HikariDataSource hikariDataSource;
 	private JdbcTemplate jdbcTemplate;
 	private Properties properties;
@@ -42,7 +44,7 @@ public class MyPay {
 
 		properties = new Properties();
 		properties.setProperty("driverClassName", "oracle.jdbc.OracleDriver");
-		properties.setProperty("jdbcUrl", "jdbc:oracle:thin:@" + ip + ":1521:zvo11g01");
+		properties.setProperty("jdbcUrl", "jdbc:oracle:thin:@" + ip + ":1521:" + sid);
 		properties.setProperty("username", username);
 		properties.setProperty("password", password);
 		properties.setProperty("connectionTimeout", "1000");
@@ -158,4 +160,11 @@ public class MyPay {
 		this.platformTransactionManager = platformTransactionManager;
 	}
 
+	public String getSid() {
+		return sid;
+	}
+
+	public void setSid(String sid) {
+		this.sid = sid;
+	}
 }
