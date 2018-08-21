@@ -9,6 +9,12 @@ import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
+
+/**
+ * ImportBeanDefinitionRegistrar 。找到资讯 然后手动注册
+ *
+ * ImportBeanDefinitionRegistrar 自己手动注册bean
+ */
 public class EnableThrowableRegistrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 
 	@Override

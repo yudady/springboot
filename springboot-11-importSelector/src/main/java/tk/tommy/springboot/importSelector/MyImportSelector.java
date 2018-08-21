@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import tk.tommy.config.MyConfig1;
 import tk.tommy.config.MyConfig2;
 
+/**
+ * 返回 full className ， spring会帮你生成bean
+ */
 @Component
 public class MyImportSelector implements ImportSelector {
 
