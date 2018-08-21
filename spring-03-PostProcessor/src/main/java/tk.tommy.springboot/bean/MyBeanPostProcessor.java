@@ -24,7 +24,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
-		System.out.println("MyBeanPostProcessor.postProcessBeforeInitialization");
+		// System.out.println("MyBeanPostProcessor.postProcessBeforeInitialization");
 
 		return bean;
 	}
@@ -32,7 +32,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 	@Nullable
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		System.out.println("MyBeanPostProcessor.postProcessAfterInitialization");
+		// System.out.println("MyBeanPostProcessor.postProcessAfterInitialization");
 		return bean;
 	}
 
