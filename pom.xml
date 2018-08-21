@@ -77,6 +77,7 @@
     <modules>
         <module>spring-01-bean</module>
         <module>spring-02-properties</module>
+        <module>spring-03-PostProcessor</module>
         <module>springboot-01-helloword</module>
         <module>springboot-02-datasource</module>
         <module>springboot-03-JTA</module>
@@ -93,6 +94,7 @@
         <module>springboot-91-db</module>
         <module>springboot-92-mypay</module>
         <module>springboot-93-mypayTx</module>
+
 
 
     </modules>
