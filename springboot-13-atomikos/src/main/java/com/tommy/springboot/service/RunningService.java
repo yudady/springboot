@@ -51,7 +51,7 @@ public class RunningService implements CommandLineRunner {
 		beanDefinitionBuilder.addPropertyValue("uniqueResourceName", "dataSourceC");
 		beanDefinitionBuilder.addPropertyValue("driverClassName", "oracle.jdbc.OracleDriver");
 		beanDefinitionBuilder.addPropertyValue("url", "jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
-		beanDefinitionBuilder.addPropertyValue("user", "mypaycenter");
+		beanDefinitionBuilder.addPropertyValue("user", "mypay");
 		beanDefinitionBuilder.addPropertyValue("password", "myPay4Zv");
 		beanDefinitionBuilder.addPropertyValue("poolSize", "5");
 		AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();

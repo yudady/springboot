@@ -21,15 +21,15 @@ public class RdService {
 	@Autowired
 	ApplicationContext applicationContext;
 
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void test() {
 
-		jdbcTemplateA.update("SELECT sysdate FROM dual");
-		jdbcTemplateB.update("SELECT sysdate FROM dual");
+		jdbcTemplateA.execute("SELECT sysdate FROM dual");
+		int update = jdbcTemplateB.update("UPDATE PY_USER SET DESCR = '1' WHERE id = 1");
+		System.out.println(" zv center " + update);
 		JdbcTemplate jdbcTemplateC = applicationContext.getBean("jdbcTemplateC", JdbcTemplate.class);
 
-		jdbcTemplateC.execute("SELECT sysdate FROM dualfsdffs");
-
+		jdbcTemplateC.execute("UPDATE PY_USER SET DESCR = '1' WHERE id = 481");
 
 		System.out.println(jdbcTemplateA.hashCode());
 		System.out.println(jdbcTemplateB.hashCode());
