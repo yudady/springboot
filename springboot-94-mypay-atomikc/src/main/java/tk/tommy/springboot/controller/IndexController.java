@@ -14,8 +14,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public Object index() {
-		indexService.test01("998");
-		return "hello";
+		return indexService.rd();
 	}
 
 	@GetMapping("/systemNews/{custNum}")
