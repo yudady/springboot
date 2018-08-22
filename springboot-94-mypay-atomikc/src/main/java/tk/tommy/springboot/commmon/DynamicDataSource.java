@@ -53,7 +53,7 @@ public class DynamicDataSource implements CommandLineRunner {
 				ip = "35.185.147.170";
 			}
 
-			if (sid.equalsIgnoreCase("zvo11g01")) {
+			if ("zvo11g01".equalsIgnoreCase(sid)) {
 				ip = "192.168.0.23";
 			}
 

@@ -26,13 +26,20 @@ public class IndexService {
 
 	@Transactional
 	public void test01(String custNum) {
-		logger.debug("[LOG] custNum	= 【" + custNum + "】");
-		String sql = "select * from py_user";
-		List<Map<String, Object>> maps1 = jdbcTemplate.queryForList(sql);
-		logger.debug("[LOG] maps1	= 【" + maps1 + "】");
+//		logger.debug("[LOG] custNum	= 【" + custNum + "】");
+//		String sql = "select * from py_user";
+//		List<Map<String, Object>> maps1 = jdbcTemplate.queryForList(sql);
+//		logger.debug("[LOG] maps1	= 【" + maps1 + "】");
+//		JdbcTemplate jt = myPayUtil.getJdbcTemplate(custNum);
+//		List<Map<String, Object>> d1 = jt.queryForList(sql);
+//		logger.debug("[LOG] d1	= 【" + d1 + "】");
+
+	}
+	@Transactional
+	public Object systemNews(String custNum) {
 		JdbcTemplate jt = myPayUtil.getJdbcTemplate(custNum);
-		List<Map<String, Object>> d1 = jt.queryForList(sql);
-		logger.debug("[LOG] d1	= 【" + d1 + "】");
+		String sql = "select * from PY_SYSTEM_NEWS";
+		return jt.queryForList(sql);
 
 	}
 }
