@@ -19,7 +19,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-data-releasetrain.version>Fowler-SR2</spring-data-releasetrain.version>
     </properties>
 
 
@@ -94,7 +93,7 @@
         <module>springboot-91-db</module>
         <module>springboot-92-mypay</module>
         <module>springboot-93-mypayTx</module>
-
+        <module>springboot-13-atomikos</module>
 
 
     </modules>
