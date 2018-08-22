@@ -5,17 +5,17 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import oracle.jdbc.xa.client.OracleXADataSource;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
 import com.atomikos.icatch.jta.UserTransactionManager;
 import com.atomikos.jdbc.AtomikosDataSourceBean;
-@Configuration
-public class Config {
+
+import oracle.jdbc.xa.client.OracleXADataSource;
+// @Configuration
+public class ConfigXa {
 
 	@Bean
 	@Primary
@@ -23,20 +23,16 @@ public class Config {
 
 		System.out.println("dataSource init");
 		Properties properties = new Properties();
-		properties.put("user","mypaycenter");
-		properties.put("password","myPay4Zv");
-		properties.put("URL","jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
-//		properties.put("jdbcUrl","jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
+		properties.put("user", "mypaycenter");
+		properties.put("password", "myPay4Zv");
+		properties.put("URL", "jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
 		OracleXADataSource oracleXADataSource = new OracleXADataSource();
 		oracleXADataSource.setConnectionProperties(properties);
-
-
 
 		AtomikosDataSourceBean xaDataSource = new AtomikosDataSourceBean();
 		xaDataSource.setXaDataSource(oracleXADataSource);
 		xaDataSource.setUniqueResourceName("dataSourceA");
 		xaDataSource.setXaDataSourceClassName("oracle.jdbc.xa.client.OracleXADataSource");
-//		oracleXADataSource.setURL("jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
 		xaDataSource.setXaProperties(properties);
 		xaDataSource.setMinPoolSize(10);
 		xaDataSource.setPoolSize(10);
@@ -59,13 +55,11 @@ public class Config {
 	public DataSource dataSourceB() throws SQLException {
 		System.out.println("dataSource init");
 		Properties properties = new Properties();
-		properties.put("user","mypaycenter");
-		properties.put("password","myPay4Zv");
-		properties.put("URL","jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
-//		properties.put("jdbcUrl","jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
+		properties.put("user", "mypaycenter");
+		properties.put("password", "myPay4Zv");
+		properties.put("URL", "jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
 		OracleXADataSource oracleXADataSource = new OracleXADataSource();
 		oracleXADataSource.setConnectionProperties(properties);
-//		oracleXADataSource.setURL("jdbc:oracle:thin:@192.168.0.23:1521:zvo11g01");
 
 		AtomikosDataSourceBean xaDataSource = new AtomikosDataSourceBean();
 		xaDataSource.setXaDataSource(oracleXADataSource);
