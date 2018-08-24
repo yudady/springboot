@@ -25,13 +25,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <version>Cairo-SR3</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -46,6 +39,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
 
             <!-- swagger2 -->
             <dependency>
@@ -70,6 +64,23 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.7</version>
             </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jdbc</artifactId>
+                <version>1.0.0.RC2</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -89,16 +100,32 @@
         <module>springboot-10-scheduled</module>
         <module>springboot-11-importSelector</module>
         <module>springboot-12-registerBeanDefinitions</module>
+        <module>springboot-13-atomikos</module>
+		<module>springboot-14-jpa</module>
+		
+		
+		
+		
+		
+		
         <module>springboot-90-my-datasource</module>
         <module>springboot-91-db</module>
         <module>springboot-92-mypay</module>
         <module>springboot-93-mypayTx</module>
-        <module>springboot-13-atomikos</module>
         <module>springboot-94-mypay-atomikc</module>
 
 
     </modules>
-
+    <repositories>
+        <repository>
+            <id>spring-libs-milestone</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>

@@ -71,6 +71,30 @@ public class LinuxShellCommand {
 
 		}
 
+		// 在線訂單通知主機------------------------------------
+		List<String> cmds = new ArrayList<>();
+
+		StringBuffer cmd = new StringBuffer();
+		String serverName = "notify";
+		if (isToday(orderNo)) {
+			cmd.append("grep ");
+		} else {
+			cmd.append("zgrep ");
+		}
+
+		if (addLineNumber) {
+			cmd.append(" -n ");
+		}
+		cmd.append(orderNo);
+		if (isToday(orderNo)) {
+			cmd.append(" /mnt/nfs/var/notify/mypaynotifycenter.log");
+		} else {
+			cmd.append(" /mnt/nfs/var/notify/LOG_BACKUP/mypaynotifycenter-" + getOrderNoDateFormat(orderNo)
+				+ ".log.zip");
+		}
+		cmds.add(cmd.toString());
+		returnVal.put(serverName, cmds);
+
 		return returnVal;
 	}
 
@@ -99,7 +123,7 @@ public class LinuxShellCommand {
 
 	public static void main(String argv[]) throws Exception {
 
-		String orderNo = "M201808170090002125";
+		String orderNo = "M201808240230002092";
 		LinuxShellCommand c = new LinuxShellCommand();
 		Map<String, List<String>> cms = c.findCommands(orderNo, true);
 
