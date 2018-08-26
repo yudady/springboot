@@ -79,6 +79,16 @@ public class MyPayUtil {
 			beanDefinitionBuilder.addPropertyValue("user", user);
 			beanDefinitionBuilder.addPropertyValue("password", password);
 			beanDefinitionBuilder.addPropertyValue("poolSize", "5");
+			//
+			beanDefinitionBuilder.addPropertyValue("testQuery", "SELECT sysdate from dual");
+			beanDefinitionBuilder.addPropertyValue("maxPoolSize", "10");
+			beanDefinitionBuilder.addPropertyValue("minPoolSize", "5");
+
+			/*
+			 * 獲取池在空時阻塞等待連接在池中可用的最長時間（以秒為單位）。
+			 */
+			// beanDefinitionBuilder.addPropertyValue("borrowConnectionTimeout", "2");
+			beanDefinitionBuilder.addPropertyValue("maintenanceInterval", "10");
 			AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
 
 			defaultListableBeanFactory.registerBeanDefinition(datasourceName, beanDefinition);
