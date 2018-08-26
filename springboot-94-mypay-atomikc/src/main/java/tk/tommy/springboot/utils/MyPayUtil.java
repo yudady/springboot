@@ -1,6 +1,9 @@
 package tk.tommy.springboot.utils;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.naming.NameNotFoundException;
 import javax.sql.DataSource;
@@ -31,6 +34,8 @@ public class MyPayUtil {
 
 	@Autowired
 	ApplicationContext applicationContext;
+
+	Set<String> custNumSet = Collections.synchronizedSortedSet(new TreeSet<>());
 
 	public JdbcTemplate getJdbcTemplate(String custNum) {
 		return applicationContext.getBean("jdbcTemplate" + custNum, JdbcTemplate.class);
@@ -88,6 +93,8 @@ public class MyPayUtil {
 
 			logger.info("create datasource => {} ", datasourceName);
 			logger.info("create jdbcTemplate => {} ", jdbcTemplateName);
+
+			custNumSet.add(custNum);
 		}
 
 	}
@@ -100,14 +107,11 @@ public class MyPayUtil {
 				.getAutowireCapableBeanFactory();
 			factory.removeBeanDefinition("jdbcTemplate" + custNum);
 			factory.removeBeanDefinition("dataSource" + custNum);
+
+			custNumSet.remove(custNum);
 		} catch (Throwable e) {
 			if (e instanceof NoSuchBeanDefinitionException) {
-				logger.info(custNum + "。不存在，无法销毁！！！");
-				logger.info(custNum + "。不存在，无法销毁！！！");
-				logger.info(custNum + "。不存在，无法销毁！！！");
-				logger.info(custNum + "。不存在，无法销毁！！！");
-				logger.info(custNum + "。不存在，无法销毁！！！");
-				logger.info(custNum + "。不存在，无法销毁！！！");
+				logger.warn(custNum + "。不存在，无法销毁！！！");
 			} else {
 				e.printStackTrace();
 				throw e;
@@ -116,4 +120,9 @@ public class MyPayUtil {
 		}
 
 	}
+
+	public Set<String> getCustsNum() {
+		return custNumSet;
+	}
+
 }

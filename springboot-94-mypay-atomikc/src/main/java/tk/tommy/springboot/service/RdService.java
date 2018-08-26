@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustService {
+public class RdService {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,6 +26,11 @@ public class CustService {
 		maps.forEach(System.out::println);
 
 		return maps;
+	}
+
+
+	public List<Map<String, Object>> rdUser() {
+		return jdbcTemplate.queryForList("select * from py_user");
 	}
 
 }

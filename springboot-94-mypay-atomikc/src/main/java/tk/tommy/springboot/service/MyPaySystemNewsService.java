@@ -16,7 +16,7 @@ import tk.tommy.springboot.utils.MyPayUtil;
 import javax.naming.NameNotFoundException;
 
 @Service
-public class IndexService {
+public class MyPaySystemNewsService {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -29,9 +29,6 @@ public class IndexService {
 	@Value("${oracle.sid}")
 	private String sid;
 
-	public List<Map<String, Object>> rd() {
-		return jdbcTemplate.queryForList("select * from py_user");
-	}
 
 	@Transactional
 	public Object systemNews(String custNum) {
@@ -40,13 +37,4 @@ public class IndexService {
 
 	}
 
-	public void destroyDatasource(String custNum) throws NameNotFoundException {
-		myPayUtil.destroyDatasource(custNum);
-	}
-
-	public Map<String, Object> createDatasource(String custNum) {
-		Map<String, Object> map = jdbcTemplate.queryForMap("SELECT * FROM py_cust where id = " + custNum);
-		myPayUtil.createDatasourceJdbcTemplate(map);
-		return map;
-	}
 }

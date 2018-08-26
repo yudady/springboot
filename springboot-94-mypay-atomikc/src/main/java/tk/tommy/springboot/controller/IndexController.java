@@ -5,35 +5,37 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import tk.tommy.springboot.service.IndexService;
-
-import javax.naming.NameNotFoundException;
+import tk.tommy.springboot.service.MyPaySystemNewsService;
+import tk.tommy.springboot.service.MypayOrderLogService;
+import tk.tommy.springboot.service.RdService;
 @RestController
 public class IndexController {
 
+
 	@Autowired
-	IndexService indexService;
+	RdService rdService;
+
+
+	@Autowired
+	MyPaySystemNewsService myPaySystemNewsService;
+
+
+	@Autowired
+	MypayOrderLogService mypayOrderLogService;
 
 	@GetMapping("/")
 	public Object index() {
-		return indexService.rd();
+		return rdService.rdUser();
+	}
+
+	@GetMapping("/notify/first")
+	public Object findFirstNotifyData() {
+		return mypayOrderLogService.findLogs();
 	}
 
 	@GetMapping("/systemNews/{custNum}")
 	public Object systemNews(@PathVariable String custNum) {
-		return indexService.systemNews(custNum);
-	}
-
-	@GetMapping("/createDatasource/{custNum}")
-	public Object createDatasource(@PathVariable String custNum) {
-		indexService.createDatasource(custNum);
-		return "ok";
-	}
-
-	@GetMapping("/destroyDatasource/{custNum}")
-	public Object destroyDatasource(@PathVariable String custNum) throws NameNotFoundException {
-		indexService.destroyDatasource(custNum);
-		return "ok";
+		return myPaySystemNewsService.systemNews(custNum);
 	}
 
 }

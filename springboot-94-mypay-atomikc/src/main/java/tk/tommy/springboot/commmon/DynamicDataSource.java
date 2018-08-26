@@ -12,7 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import tk.tommy.springboot.service.CustService;
+import tk.tommy.springboot.service.RdService;
 import tk.tommy.springboot.utils.MyPayUtil;
 
 @Component
@@ -26,8 +26,7 @@ public class DynamicDataSource implements CommandLineRunner {
 	@Autowired
 	ApplicationContext applicationContext;
 
-	@Autowired
-	CustService custService;
+	@Autowired RdService rdService;
 
 	@Autowired
 	MyPayUtil myPayUtil;
@@ -35,7 +34,7 @@ public class DynamicDataSource implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 
-		List<Map<String, Object>> custs = custService.findCusts();
+		List<Map<String, Object>> custs = rdService.findCusts();
 		for (Map<String, Object> map : custs) {
 			Object disable_date = map.get("DISABLE_DATE");
 			if (Objects.nonNull(disable_date)) {
