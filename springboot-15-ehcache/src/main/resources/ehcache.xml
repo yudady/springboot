@@ -4,7 +4,7 @@
          updateCheck="true"
          monitoring="autodetect"
          dynamicConfig="true">
-
+    <!-- 默认缓存 -->
     <cache name="instruments"
            maxElementsInMemory="100"
            eternal="false"
@@ -14,5 +14,25 @@
            memoryStoreEvictionPolicy="LFU"
            transactionalMode="off">
     </cache>
+
+
+    <!-- helloworld缓存 -->
+    <cache name="HelloWorldCache"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="5"
+           timeToLiveSeconds="5"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LRU"/>
+
+
+    <cache name="UserCache"
+           maxElementsInMemory="1000"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LRU"/>
+
 
 </ehcache>
