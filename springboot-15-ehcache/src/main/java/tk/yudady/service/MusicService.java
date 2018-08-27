@@ -14,6 +14,7 @@ public class MusicService {
 
 	@CacheEvict(allEntries = true)
 	public void clearCache() {
+		log.info("clearCache");
 	}
 
 	@Cacheable(condition = "#instrument.equals('trombone')")

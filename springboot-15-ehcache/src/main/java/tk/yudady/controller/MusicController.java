@@ -31,6 +31,11 @@ public class MusicController {
 		play("trombone");
 		play("bass");
 		play("trombone");
+		play("trombone");
+		play("trombone");
+		play("trombone");
+		play("trombone");
+		play("trombone");
 
 		return "hello";
 	}

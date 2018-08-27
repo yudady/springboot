@@ -2,3 +2,14 @@ spring:
   cache:
     ehcache:
       config: classpath:ehcache.xml
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cache: debug
+    net:
+      sf:
+        ehcache: debug
+
+
