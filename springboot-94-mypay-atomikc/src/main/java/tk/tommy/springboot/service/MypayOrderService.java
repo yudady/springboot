@@ -101,7 +101,7 @@ public class MypayOrderService {
 
 	public Object findTodayOrderCount() {
 		LocalDateTime now1 = LocalDateTime.now();
-		List<Map<String, Integer>> collect = myPayUtil.getCustsNum().stream().parallel().map(custNum -> {
+		List<Map<String, Integer>> collect = myPayUtil.getCustsNum().parallelStream().map(custNum -> {
 			Map<String, Integer> map = new LinkedHashMap<>();
 			Integer countByCustNum = findTodayOrderCountByCustNum(custNum);
 			if (countByCustNum > 0) {
