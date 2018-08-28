@@ -43,7 +43,7 @@
         <module>springboot-92-mypay</module>
         <module>springboot-93-mypayTx</module>
         <module>springboot-94-mypay-atomikc</module>
-
+        <module>springboot-95-oracle2mysql</module>
 
     </modules>
 
