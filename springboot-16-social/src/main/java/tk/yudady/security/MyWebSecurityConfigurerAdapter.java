@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
-	String[] passUrls = {"/registration", "about", "/user/**", "/login", "/login/**"};
+	String[] passUrls = {"/registration/**", "/authentication/**", "/logout/**"};
 	String[] csrfUrls = {"/api/**", "/rest/**"};
 
 	@Autowired
@@ -22,22 +22,30 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http
+			// UsernamePasswordAuthenticationFilter
+			.formLogin()//
+			.usernameParameter("username").passwordParameter("password") //
+			.loginPage("/authentication/request")//
+			.loginProcessingUrl("/authentication/form") //
+			.failureForwardUrl("/authentication/login") //
+			.successForwardUrl("/redirectHome") //
 			//
-			.formLogin().loginPage("/login")
-			//.loginProcessingUrl("/login/form")
-			.failureForwardUrl("/login")
-			.successForwardUrl("/redirectHome")
-			.usernameParameter("username").passwordParameter("password").permitAll()
+			.and()//
+			.logout()//
+			.logoutUrl("/logout")//
+			.logoutSuccessHandler(myLogoutSuccessHandler)//
+			.deleteCookies("JSESSIONID")//
+			.clearAuthentication(true)//
+			.invalidateHttpSession(true)//
 			//
-			.and().logout().logoutUrl("/logout").logoutSuccessHandler(myLogoutSuccessHandler)
-			.deleteCookies("JSESSIONID").clearAuthentication(true).invalidateHttpSession(true).permitAll()
+			.and()//
+			.authorizeRequests().antMatchers(passUrls).permitAll()//
+			.anyRequest().authenticated()//
 			//
-			.and().authorizeRequests().antMatchers(passUrls).permitAll().anyRequest().authenticated()
-			//
-			.and().csrf().disable()
-			//.ignoringAntMatchers(csrfUrls)
-			//
-			//.and().and().sessionManagement().maximumSessions(1)
+			.and().csrf().disable()//
+		// .ignoringAntMatchers(csrfUrls)
+		//
+		// .and().and().sessionManagement().maximumSessions(1)
 		//
 		;
 	}
@@ -46,8 +54,7 @@ public class MyWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService());
 
-
-			//.passwordEncoder(passwordEncoder());
+		// .passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
