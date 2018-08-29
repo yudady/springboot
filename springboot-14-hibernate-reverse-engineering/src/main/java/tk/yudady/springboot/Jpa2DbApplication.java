@@ -1,7 +1,5 @@
 package tk.yudady.springboot;
 
-import java.util.Arrays;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 
 @SpringBootApplication
 public class Jpa2DbApplication implements CommandLineRunner {

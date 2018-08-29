@@ -34,7 +34,7 @@
         <module>springboot-11-importSelector</module>
         <module>springboot-12-registerBeanDefinitions</module>
         <module>springboot-13-atomikos</module>
-        <module>springboot-14-jpa</module>
+        <module>springboot-14-hibernate-reverse-engineering</module>
         <module>springboot-15-ehcache</module>
         <module>springboot-16-social</module>
 

@@ -8,9 +8,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>springboot-14-jpa</artifactId>
+    <artifactId>springboot-14-hibernate-reverse-engineering</artifactId>
 
-    <name>springboot-14-jpa</name>
+    <name>springboot-14-hibernate-reverse-engineering</name>
 
     <dependencies>
 
