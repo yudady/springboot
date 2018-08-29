@@ -4,8 +4,8 @@ import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.stereotype.Component;
-import tk.tommy.config.MyConfig1;
-import tk.tommy.config.MyConfig2;
+import tk.tommy.springboot.config.MyConfig1;
+import tk.tommy.springboot.config.MyConfig2;
 
 /**
  * 返回 full className ， spring会帮你生成bean

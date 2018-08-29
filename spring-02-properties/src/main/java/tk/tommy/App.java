@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import tk.tommy.config.MyEnvironmentPostProcessor;
+import tk.tommy.springboot.config.MyEnvironmentPostProcessor;
 
 @ComponentScan
 public class App {

@@ -12,6 +12,11 @@
 
     <name>springboot-16-social</name>
 
+    <properties>
+        <springframework.social.version>1.1.6.RELEASE</springframework.social.version>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,21 +56,30 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+
+
+
+        <!-- social -->
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-config</artifactId>
+            <version>${springframework.social.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-core</artifactId>
+            <version>${springframework.social.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-security</artifactId>
+            <version>${springframework.social.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-web</artifactId>
+            <version>${springframework.social.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

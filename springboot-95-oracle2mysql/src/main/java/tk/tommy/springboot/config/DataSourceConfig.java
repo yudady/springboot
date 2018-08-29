@@ -1,4 +1,4 @@
-package tk.tommy.config;
+package tk.tommy.springboot.config;
 
 import javax.sql.DataSource;
 

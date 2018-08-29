@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import tk.tommy.bean.*;
-import tk.tommy.config.MyConfig;
+import tk.tommy.springboot.config.MyConfig;
 import tk.tommy.init.MyBeanDefinitionRegistryPostProcessor;
 import tk.tommy.init.MyBeanFactoryPostProcessor;
 import tk.tommy.init.MyBeanPostProcessor;

@@ -1,4 +1,4 @@
-package tk.tommy.config;
+package tk.tommy.springboot.config;
 
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
