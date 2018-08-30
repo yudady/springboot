@@ -22,7 +22,10 @@
         <module>spring-02-properties</module>
         <module>spring-03-PostProcessor</module>
 	    <module>spring-04-Interceptor</module>	
-	    <module>spring-05-filter</module>	
+	    <module>spring-05-filter</module>
+		<module>spring-06-mockmvc</module>
+		<module>spring-07-servlet</module>
+		<module>spring-08-listener</module>		
 		
 		
         <module>springboot-01-helloword</module>
