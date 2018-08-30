@@ -13,10 +13,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import tk.tommy.springboot.service.RdService;
-import tk.tommy.springboot.utils.MyPayUtil;
+import tk.tommy.springboot.utils.MyPayDataSourceHolder;
 
 @Component
-public class DynamicDataSource implements CommandLineRunner {
+public class DynamicDataSourceCreator implements CommandLineRunner {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -28,8 +28,7 @@ public class DynamicDataSource implements CommandLineRunner {
 
 	@Autowired RdService rdService;
 
-	@Autowired
-	MyPayUtil myPayUtil;
+	@Autowired MyPayDataSourceHolder myPayDataSourceHolder;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -44,7 +43,7 @@ public class DynamicDataSource implements CommandLineRunner {
 			if ("003".equalsIgnoreCase(map.get("NAME").toString())) {
 				continue;
 			}
-			myPayUtil.createDatasourceJdbcTemplate(map);
+			myPayDataSourceHolder.createDatasourceJdbcTemplate(map);
 		}
 
 	}

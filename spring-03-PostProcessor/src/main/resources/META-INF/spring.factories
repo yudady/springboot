@@ -1,1 +1,1 @@
-org.springframework.boot.env.EnvironmentPostProcessor=tk.tommy.springboot.bean.MyEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=tk.yudady.bean.MyEnvironmentPostProcessor

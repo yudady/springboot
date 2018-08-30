@@ -16,26 +16,25 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tk.tommy.springboot.utils.MyPayUtil;
+import tk.tommy.springboot.utils.MyPayDataSourceHolder;
 
 @Service
 public class MypayOrderService {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	MyPayUtil myPayUtil;
+	@Autowired MyPayDataSourceHolder myPayDataSourceHolder;
 
 	@Transactional
 	public Object systemNews(String custNum) {
-		JdbcTemplate jt = myPayUtil.getJdbcTemplate(custNum);
+		JdbcTemplate jt = myPayDataSourceHolder.getJdbcTemplate(custNum);
 		return jt.queryForList("SELECT * FROM PY_SYSTEM_NEWS");
 
 	}
 
 	public Object findLogs() {
 		LocalDateTime now1 = LocalDateTime.now();
-		List<Map<String, Object>> collect = myPayUtil.getCustsNum().stream().parallel().map(custNum -> {
+		List<Map<String, Object>> collect = myPayDataSourceHolder.getCustsNum().stream().parallel().map(custNum -> {
 			Map<String, Object> map = new LinkedHashMap<>();
 			Map<Object, List<Map<String, Object>>> logByCustNum = findLogByCustNum(custNum);
 			if (logByCustNum.entrySet().size() > 0) {
@@ -56,7 +55,7 @@ public class MypayOrderService {
 	public Map<Object, List<Map<String, Object>>> findLogByCustNum(String custNum) {
 		String searchDate = LocalDate.now().toString().replace("-", "");
 		String sql = "SELECT * FROM PY_MYPAY_ORDER_LOG WHERE order_no LIKE 'M" + searchDate + "%' ";
-		JdbcTemplate jdbcTemplate = myPayUtil.getJdbcTemplate(custNum);
+		JdbcTemplate jdbcTemplate = myPayDataSourceHolder.getJdbcTemplate(custNum);
 
 		Map<Object, List<Map<String, Object>>> collect = jdbcTemplate.queryForList(sql).stream()
 			.collect(Collectors.groupingBy(x -> x.get("ORDER_NO"))).entrySet().stream().filter(m -> {
@@ -74,7 +73,7 @@ public class MypayOrderService {
 	public Object findTodayMyPayOrderCount() {
 
 		LocalDateTime now1 = LocalDateTime.now();
-		List<Map<String, Integer>> collect = myPayUtil.getCustsNum().stream().parallel().map(custNum -> {
+		List<Map<String, Integer>> collect = myPayDataSourceHolder.getCustsNum().stream().parallel().map(custNum -> {
 			Map<String, Integer> map = new LinkedHashMap<>();
 			Integer countByCustNum = findTodayMyPayOrderCountByCustNum(custNum);
 			if (countByCustNum > 0) {
@@ -95,13 +94,13 @@ public class MypayOrderService {
 	public Integer findTodayMyPayOrderCountByCustNum(String custNum) {
 		String searchDate = LocalDate.now().toString().replace("-", "");
 		String sql = "SELECT COUNT(1) FROM PY_MYPAY_ORDER WHERE order_no LIKE 'M" + searchDate + "%' ";
-		JdbcTemplate jdbcTemplate = myPayUtil.getJdbcTemplate(custNum);
+		JdbcTemplate jdbcTemplate = myPayDataSourceHolder.getJdbcTemplate(custNum);
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 
 	public Object findTodayOrderCount() {
 		LocalDateTime now1 = LocalDateTime.now();
-		List<Map<String, Integer>> collect = myPayUtil.getCustsNum().parallelStream().map(custNum -> {
+		List<Map<String, Integer>> collect = myPayDataSourceHolder.getCustsNum().parallelStream().map(custNum -> {
 			Map<String, Integer> map = new LinkedHashMap<>();
 			Integer countByCustNum = findTodayOrderCountByCustNum(custNum);
 			if (countByCustNum > 0) {
@@ -122,7 +121,7 @@ public class MypayOrderService {
 	public Integer findTodayOrderCountByCustNum(String custNum) {
 		String searchDate = LocalDate.now().toString().replace("-", "");
 		String sql = "SELECT COUNT(1) FROM PY_ORDER WHERE order_no LIKE '" + searchDate + "%' ";
-		JdbcTemplate jdbcTemplate = myPayUtil.getJdbcTemplate(custNum);
+		JdbcTemplate jdbcTemplate = myPayDataSourceHolder.getJdbcTemplate(custNum);
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 }

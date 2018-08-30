@@ -1,13 +1,13 @@
-package tk.tommy.springboot.conf;
+package tk.yudady.conf;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import tk.tommy.springboot.bean.MyBeanFactoryPostProcessor;
-import tk.tommy.springboot.bean.MyBeanPostProcessor;
-import tk.tommy.springboot.bean.MyEnvironmentPostProcessor;
-import tk.tommy.springboot.bean.MyInstantiationAwareBeanPostProcessorAdapter;
-import tk.tommy.springboot.vo.User;
+import tk.yudady.bean.MyBeanFactoryPostProcessor;
+import tk.yudady.bean.MyBeanPostProcessor;
+import tk.yudady.bean.MyEnvironmentPostProcessor;
+import tk.yudady.bean.MyInstantiationAwareBeanPostProcessorAdapter;
+import tk.yudady.vo.User;
 
 @Configuration
 public class Config {

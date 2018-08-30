@@ -1,4 +1,4 @@
-package tk.tommy.springboot.bean;
+package tk.yudady.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

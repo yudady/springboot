@@ -21,6 +21,10 @@
         <module>spring-01-bean</module>
         <module>spring-02-properties</module>
         <module>spring-03-PostProcessor</module>
+	    <module>spring-04-Interceptor</module>	
+		
+		
+		
         <module>springboot-01-helloword</module>
         <module>springboot-02-datasource</module>
         <module>springboot-03-JTA</module>

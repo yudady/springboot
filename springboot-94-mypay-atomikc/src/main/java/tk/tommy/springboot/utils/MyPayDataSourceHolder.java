@@ -25,7 +25,7 @@ import com.atomikos.jdbc.nonxa.AtomikosNonXADataSourceBean;
 import com.atomikos.util.IntraVmObjectRegistry;
 
 @Component
-public class MyPayUtil {
+public class MyPayDataSourceHolder {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 

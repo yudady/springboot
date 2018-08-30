@@ -25,6 +25,14 @@ public class SysUserLoginInterceptor implements HandlerInterceptor {
 
 	}
 
+	/**
+	 * 
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @param o
+	 * @param e
+	 * @throws Exception
+	 */
 	@Override
 	public void afterCompletion(HttpServletRequest httpServletRequest,
 		HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {

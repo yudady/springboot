@@ -11,15 +11,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import tk.tommy.springboot.utils.MyPayUtil;
+import tk.tommy.springboot.utils.MyPayDataSourceHolder;
 
 @Service
 public class DataSourceService {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	MyPayUtil myPayUtil;
+	@Autowired MyPayDataSourceHolder myPayDataSourceHolder;
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -28,12 +27,12 @@ public class DataSourceService {
 	private String sid;
 
 	public void destroyDatasource(String custNum) throws NameNotFoundException {
-		myPayUtil.destroyDatasource(custNum);
+		myPayDataSourceHolder.destroyDatasource(custNum);
 	}
 
 	public Map<String, Object> createDatasource(String custNum) {
 		Map<String, Object> map = jdbcTemplate.queryForMap("SELECT * FROM py_cust where id = " + custNum);
-		myPayUtil.createDatasourceJdbcTemplate(map);
+		myPayDataSourceHolder.createDatasourceJdbcTemplate(map);
 		return map;
 	}
 }

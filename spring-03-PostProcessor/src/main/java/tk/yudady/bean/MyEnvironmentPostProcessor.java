@@ -1,4 +1,4 @@
-package tk.tommy.springboot.bean;
+package tk.yudady.bean;
 
 import java.util.Properties;
 

@@ -32,7 +32,7 @@ public class ConfigWebMvc implements WebMvcConfigurer {
 	}
 
 	/**
-	 * 添加拦截器
+	 * 添加拦截器. ***controller***
 	 * 
 	 * @param registry
 	 */
@@ -42,6 +42,11 @@ public class ConfigWebMvc implements WebMvcConfigurer {
 		registry.addInterceptor(new OneInterceptor()).addPathPatterns("/one/**").addPathPatterns("/two/**");
 	}
 
+	/**
+	 * Filter
+	 * 
+	 * @return
+	 */
 	@Bean
 	public FilterRegistrationBean getDemoFilter() {
 		DemoFilter demoFilter = new DemoFilter();
@@ -54,6 +59,11 @@ public class ConfigWebMvc implements WebMvcConfigurer {
 		return registrationBean;
 	}
 
+	/**
+	 * Filter
+	 *
+	 * @return
+	 */
 	@Bean
 	public ServletRegistrationBean getDemoServlet() {
 		DemoServlet demoServlet = new DemoServlet();
@@ -66,6 +76,11 @@ public class ConfigWebMvc implements WebMvcConfigurer {
 		return registrationBean;
 	}
 
+	/**
+	 * Filter
+	 *
+	 * @return
+	 */
 	@Bean
 	public ServletListenerRegistrationBean<EventListener> getDemoListener() {
 		ServletListenerRegistrationBean<EventListener> registrationBean = new ServletListenerRegistrationBean<>();
