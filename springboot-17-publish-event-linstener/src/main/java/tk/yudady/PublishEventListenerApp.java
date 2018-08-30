@@ -1,9 +1,17 @@
 package tk.yudady;
 
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.AsyncTaskExecutor;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import tk.yudady.publish.ListenerService;
 
@@ -23,18 +31,50 @@ import tk.yudady.publish.ListenerService;
  * 使用容器触发事件
  */
 @SpringBootApplication
+@EnableAsync
 public class PublishEventListenerApp implements CommandLineRunner {
 
 	@Autowired
 	ListenerService ListenerService;
 
-	public static void main(String[] args) {
-		SpringApplication.run(PublishEventListenerApp.class, args);
+	public static void main(String[] args) throws InterruptedException {
+		ConfigurableApplicationContext run = SpringApplication.run(PublishEventListenerApp.class, args);
+
+		AsyncTaskExecutor executor = run.getBean(AsyncTaskExecutor.class);
+		TimeUnit.SECONDS.sleep(10);
+		run.close();
+
+
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		ListenerService.publish(" PUBLISH MSG ~~~~  ");
 
+	}
+
+	// 自定义线程池，当配置多个executor时，被@Async("id")指定使用；也被作为线程名的前缀
+	@Bean
+	public AsyncTaskExecutor taskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+
+		// 线程池名字
+		executor.setThreadNamePrefix("async-Pool-");
+		// 最大线程数
+		executor.setMaxPoolSize(50);
+		// 最小线程数
+		executor.setCorePoolSize(3);
+
+		// 使用预定义的异常处理类
+		executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+
+		// 自定义拒绝策略
+		/*
+		 * executor.setRejectedExecutionHandler(new RejectedExecutionHandler() {
+		 * 
+		 * @Override public void rejectedExecution(Runnable r, ThreadPoolExecutor
+		 * executor) { //........ } });
+		 */
+		return executor;
 	}
 }
