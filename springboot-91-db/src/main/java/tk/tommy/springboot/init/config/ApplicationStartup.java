@@ -23,7 +23,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		ConfigurableApplicationContext applicationContext = event.getApplicationContext();
 		Stream.of(applicationContext.getBeanNamesForType(MyPay.class)).parallel().forEach(e -> {
 			MyPay bean = (MyPay) applicationContext.getBean(e);
-			//bean.initMethod();
+			//listener.initMethod();
 		});;
 	}
 }

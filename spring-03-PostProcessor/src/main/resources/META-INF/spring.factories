@@ -1,1 +1,1 @@
-org.springframework.boot.env.EnvironmentPostProcessor=tk.yudady.bean.MyEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=tk.yudady.listener.MyEnvironmentPostProcessor

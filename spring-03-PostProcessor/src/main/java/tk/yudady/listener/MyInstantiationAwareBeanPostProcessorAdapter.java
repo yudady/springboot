@@ -1,4 +1,4 @@
-package tk.yudady.bean;
+package tk.yudady.listener;
 
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 public class MyInstantiationAwareBeanPostProcessorAdapter extends InstantiationAwareBeanPostProcessorAdapter {
@@ -27,10 +27,10 @@ public class MyInstantiationAwareBeanPostProcessorAdapter extends InstantiationA
 	// }
 	//
 	// @Override
-	// public Object getEarlyBeanReference(Object bean, String beanName) throws
+	// public Object getEarlyBeanReference(Object listener, String beanName) throws
 	// BeansException {
 	// System.out.println("MyInstantiationAwareBeanPostProcessorAdapter.getEarlyBeanReference");
-	// return super.getEarlyBeanReference(bean, beanName);
+	// return super.getEarlyBeanReference(listener, beanName);
 	// }
 	//
 	// @Nullable
@@ -42,31 +42,31 @@ public class MyInstantiationAwareBeanPostProcessorAdapter extends InstantiationA
 	// }
 	//
 	// @Override
-	// public boolean postProcessAfterInstantiation(Object bean, String beanName)
+	// public boolean postProcessAfterInstantiation(Object listener, String beanName)
 	// throws BeansException {
 	// System.out.println("MyInstantiationAwareBeanPostProcessorAdapter.postProcessAfterInstantiation");
-	// return super.postProcessAfterInstantiation(bean, beanName);
+	// return super.postProcessAfterInstantiation(listener, beanName);
 	// }
 	//
 	// @Override
 	// public PropertyValues postProcessPropertyValues(PropertyValues pvs,
-	// PropertyDescriptor[] pds, Object bean,
+	// PropertyDescriptor[] pds, Object listener,
 	// String beanName) throws BeansException {
 	// System.out.println("MyInstantiationAwareBeanPostProcessorAdapter.postProcessPropertyValues");
-	// return super.postProcessPropertyValues(pvs, pds, bean, beanName);
+	// return super.postProcessPropertyValues(pvs, pds, listener, beanName);
 	// }
 	//
 	// @Override
-	// public Object postProcessBeforeInitialization(Object bean, String beanName)
+	// public Object postProcessBeforeInitialization(Object listener, String beanName)
 	// throws BeansException {
 	// System.out.println("MyInstantiationAwareBeanPostProcessorAdapter.postProcessBeforeInitialization");
-	// return super.postProcessBeforeInitialization(bean, beanName);
+	// return super.postProcessBeforeInitialization(listener, beanName);
 	// }
 	//
 	// @Override
-	// public Object postProcessAfterInitialization(Object bean, String beanName)
+	// public Object postProcessAfterInitialization(Object listener, String beanName)
 	// throws BeansException {
 	// System.out.println("MyInstantiationAwareBeanPostProcessorAdapter.postProcessAfterInitialization");
-	// return super.postProcessAfterInitialization(bean, beanName);
+	// return super.postProcessAfterInitialization(listener, beanName);
 	// }
 }

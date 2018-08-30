@@ -41,7 +41,9 @@
         <module>springboot-14-hibernate-reverse-engineering</module>
         <module>springboot-15-ehcache</module>
         <module>springboot-16-social</module>
-
+        <module>springboot-17-publish-event-linstener</module>
+		
+		
         <module>springboot-90-my-datasource</module>
         <module>springboot-91-db</module>
         <module>springboot-92-mypay</module>

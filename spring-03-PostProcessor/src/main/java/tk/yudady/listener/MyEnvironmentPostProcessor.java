@@ -1,4 +1,4 @@
-package tk.yudady.bean;
+package tk.yudady.listener;
 
 import java.util.Properties;
 

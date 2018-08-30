@@ -3,10 +3,10 @@ package tk.yudady.conf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import tk.yudady.bean.MyBeanFactoryPostProcessor;
-import tk.yudady.bean.MyBeanPostProcessor;
-import tk.yudady.bean.MyEnvironmentPostProcessor;
-import tk.yudady.bean.MyInstantiationAwareBeanPostProcessorAdapter;
+import tk.yudady.listener.MyBeanFactoryPostProcessor;
+import tk.yudady.listener.MyBeanPostProcessor;
+import tk.yudady.listener.MyEnvironmentPostProcessor;
+import tk.yudady.listener.MyInstantiationAwareBeanPostProcessorAdapter;
 import tk.yudady.vo.User;
 
 @Configuration

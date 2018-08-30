@@ -37,7 +37,7 @@ public class AppTest {
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		LOGGER.debug("MyBeanFactory =>  {} ", anno.getBean(MyBeanFactory.class));
 		for (int i = 0; i < 10; i++) {
-			LOGGER.debug("动态注册 bean =>  {} ", i + " - " + anno.getBean("registryBean" + i));
+			LOGGER.debug("动态注册 listener =>  {} ", i + " - " + anno.getBean("registryBean" + i));
 		}
 
 		LOGGER.debug("SingletonBean.inject.PrototypeBean =>  {} ",

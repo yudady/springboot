@@ -24,7 +24,7 @@ public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegi
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		System.out.println(
-			"动态注册 bean ， spring 容器初始化完后 postProcessBeanDefinitionRegistry.postProcessBeanDefinitionRegistry : "
+			"动态注册 listener ， spring 容器初始化完后 postProcessBeanDefinitionRegistry.postProcessBeanDefinitionRegistry : "
 				+ registry);
 
 		for (int i = 0; i < 10; i++) {

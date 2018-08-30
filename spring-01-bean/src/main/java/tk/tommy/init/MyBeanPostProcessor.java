@@ -9,7 +9,7 @@ import javax.imageio.stream.IIOByteBuffer;
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
 	/**
-	 * bean 属性设定完毕
+	 * listener 属性设定完毕
 	 * @param bean
 	 * @param beanName
 	 * @return
@@ -23,7 +23,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 	}
 
 	/**
-	 * bean init 后执行
+	 * listener init 后执行
 	 * @param bean
 	 * @param beanName
 	 * @return
