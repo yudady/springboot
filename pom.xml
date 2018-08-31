@@ -32,7 +32,7 @@
 		<module>spring-08-listener</module>
 		<module>spring-09-jsonview</module>				
 		<module>spring-10-test-with-server</module>		
-
+		<module>spring-11-selenium</module>	
 
 
 		

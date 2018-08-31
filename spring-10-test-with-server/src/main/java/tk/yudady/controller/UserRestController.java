@@ -1,14 +1,9 @@
 package tk.yudady.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import tk.yudady.model.User;
 import tk.yudady.service.UserService;
@@ -23,28 +18,29 @@ public class UserRestController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces =
+	// MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/{id}")
 	public @ResponseBody User findById(@PathVariable("id") Long id) {
 		return userService.findById(1L);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<User> save(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
-		// save user
-		user.setId(1L);
-		MultiValueMap headers = new HttpHeaders();
-		headers.set("Location",
-			uriComponentsBuilder.path("/users/{id}").buildAndExpand(user.getId()).toUriString());
-		return new ResponseEntity(user, headers, HttpStatus.CREATED);
+	// @RequestMapping(method = RequestMethod.POST)
+	@PostMapping("/{id}")
+	public @ResponseBody User postUser(@PathVariable("id") Long id) {
+		return userService.findById(1L);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes =
+	// MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@RequestBody User user) {
 		// update by id
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	// @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Long id) {
 		// delete by id
 	}
