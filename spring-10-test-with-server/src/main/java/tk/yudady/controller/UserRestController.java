@@ -5,13 +5,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import tk.yudady.model.User;
 import tk.yudady.service.UserService;
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserRestController {
 
@@ -23,12 +24,12 @@ public class UserRestController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public User findById(@PathVariable("id") Long id) {
+	public @ResponseBody User findById(@PathVariable("id") Long id) {
 		return userService.findById(1L);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<User> save(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
+	public @ResponseBody ResponseEntity<User> save(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
 		// save user
 		user.setId(1L);
 		MultiValueMap headers = new HttpHeaders();
