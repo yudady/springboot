@@ -1,20 +1,16 @@
 package tk.yudady;
 
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
-public class FilterApp {
+public class MockMvcApp {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(FilterApp.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(MockMvcApp.class);
 
 	public static void main(String[] args) throws InterruptedException {
-		ConfigurableApplicationContext run = SpringApplication.run(FilterApp.class, args);
-
+		SpringApplication.run(MockMvcApp.class, args);
 
 	}
 }
