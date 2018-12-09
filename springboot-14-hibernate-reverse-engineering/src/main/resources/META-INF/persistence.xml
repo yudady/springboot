@@ -5,7 +5,7 @@
              version="2.1">
 
 
-    <persistence-unit name="myPay" transaction-type="JTA">
+    <persistence-unit name="myPay">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
@@ -33,10 +33,31 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://192.168.0.21:3306/MyCenter"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 
 
         </properties>
     </persistence-unit>
 
+
+    <persistence-unit name="myCenterControl">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://192.168.0.21:3306/MyCenterControl"/>
+            <property name="javax.persistence.jdbc.user" value="mycc"/>
+            <property name="javax.persistence.jdbc.password" value="Mycc@123"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://192.168.0.21:3306/MyCenterControl"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+
+
+        </properties>
+    </persistence-unit>
 
 </persistence>
