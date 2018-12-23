@@ -1,0 +1,7 @@
+
+spring:
+  redis:
+    host: futebol.leadadvancetech.com
+    timeout: 3000
+    password: The0ne
+    port: 6379
