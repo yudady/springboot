@@ -1,0 +1,7 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.79.50:9300
+      cluster-name: elasticsearch
+      local: false
+      client-transport-sniff: false

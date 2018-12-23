@@ -57,7 +57,9 @@
         <module>springboot-18-thymeleaf</module>
         <module>springboot-19-tester</module>
         <module>springboot-20-data-redis</module>
-
+		<module>springboot-21-kafka</module>
+		<module>springboot-22-elasticsearch</module>
+		<module>springboot-23-mybatis</module>
 
 
 
