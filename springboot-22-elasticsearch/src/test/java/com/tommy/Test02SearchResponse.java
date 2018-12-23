@@ -1,7 +1,5 @@
 package com.tommy;
 
-import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
-
 import java.util.Date;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +11,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -35,7 +34,7 @@ public class Test02SearchResponse {
 		Client client = elasticsearchTemplate.getClient();
 
 		String id = "" + new Date().getTime();
-		XContentBuilder builder = jsonBuilder()//
+		XContentBuilder builder = XContentFactory.jsonBuilder()//
 			.startObject()//
 			.field("id", id)//
 			.field("user", "kimchy")//
