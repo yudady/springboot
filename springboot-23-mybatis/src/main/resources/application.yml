@@ -4,7 +4,7 @@ server:
 spring:
     datasource:
         name: test
-        url: jdbc:mysql://marseille.leadadvancetech.com:3306/dbBR?autoReconnect=true&useSSL=false&characterEncoding=UTF-8
+        url: jdbc:mysql://192.168.79.50:3306/dbBR?autoReconnect=true&useSSL=false&characterEncoding=UTF-8
         username: latdbdev
         password: l@tThe0ne
         driver-class-name: com.mysql.jdbc.Driver

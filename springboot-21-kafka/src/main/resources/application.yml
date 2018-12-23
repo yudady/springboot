@@ -1,0 +1,18 @@
+server:
+  port: 8088
+
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: 192.168.79.50:6667
+    consumer:
+      group-id: springboot-group
+#      auto-commit-interval: earliest
+
+
+
+logging:
+  level:
+    Root: info
+    org: info
+    com: debug
