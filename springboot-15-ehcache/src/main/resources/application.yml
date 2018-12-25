@@ -12,4 +12,7 @@ logging:
       sf:
         ehcache: debug
 
+debug: true
+server:
+  port: 8080
 

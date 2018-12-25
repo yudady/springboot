@@ -60,6 +60,7 @@
 		<module>springboot-21-kafka</module>
 		<module>springboot-22-elasticsearch</module>
 		<module>springboot-23-mybatis</module>
+		<module>springboot-24-selenium</module>
 
 
 
