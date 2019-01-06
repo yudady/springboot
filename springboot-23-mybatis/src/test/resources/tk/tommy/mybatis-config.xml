@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
+    <typeAliases>
+        <!--
+            <typeAlias type="tk.tommy.model.RegionSport" alias="regionSport" />
+        -->
+        <package name="tk.tommy.model"/>
+
+    </typeAliases>
+
+    <!--<typeHandlers>-->
+        <!--<typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"-->
+        <!--javaType="java.math.RoundingMode"/>-->
+    <!--</typeHandlers>-->
+
+
+    <environments default="br">
+
+        <environment id="dgt">
+            <!--
+                transactionManager JDBC|MANAGED
+            -->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://192.168.79.50:3306/dbBR?autoReconnect=true&amp;useSSL=false&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="latdbdev"/>
+                <property name="password" value="l@tThe0ne"/>
+            </dataSource>
+        </environment>
+        <environment id="br">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://192.168.79.50:3306/dbBR?autoReconnect=true&amp;useSSL=false&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="latdbdev"/>
+                <property name="password" value="l@tThe0ne"/>
+            </dataSource>
+        </environment>
+        <environment id="sdp">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://192.168.79.50:3306/dbBR?autoReconnect=true&amp;useSSL=false&amp;characterEncoding=UTF-8"/>
+                <property name="username" value="latdbdev"/>
+                <property name="password" value="l@tThe0ne"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+        <property name="SQL Server" value="sqlserver"/>
+        <property name="DB2" value="db2"/>
+        <property name="Oracle" value="oracle"/>
+    </databaseIdProvider>
+
+    <mappers>
+        <mapper resource="tk/tommy/RegionSportMapper.xml"/>
+    </mappers>
+
+
+</configuration>
+

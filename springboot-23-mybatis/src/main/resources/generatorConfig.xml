@@ -33,12 +33,12 @@
         </sqlMapGenerator>
 
         <!-- Mapper 接口文件的位置 -->
-        <javaClientGenerator targetPackage="com.betmatrix.theonex.dao.br.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.betmatrix.theonex.dao.br.dao" targetProject="src/main/java" type="XMLMAPPER" >
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
         <!-- 相关表的配置 -->
-        <table tableName="MatchMarketArgument" domainObjectName="BrMatchMarketArgument" modelType="flat" enableDeleteByPrimaryKey="false" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="RegionSport" domainObjectName="RegionSport" modelType="flat" enableDeleteByPrimaryKey="false" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="true"/>
         </table>
     </context>

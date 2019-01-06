@@ -20,21 +20,18 @@
     <modules>
 
 
-
-		<module>spring-00-archetype</module>
+        <module>spring-00-archetype</module>
         <module>spring-01-bean</module>
         <module>spring-02-properties</module>
         <module>spring-03-PostProcessor</module>
-	    <module>spring-04-Interceptor</module>
-	    <module>spring-05-filter</module>
-		<module>spring-06-mockmvc</module>
-		<module>spring-07-servlet</module>
-		<module>spring-08-listener</module>
-		<module>spring-09-jsonview</module>
-		<module>spring-10-test-with-server</module>
-		<module>spring-11-selenium</module>
-
-
+        <module>spring-04-Interceptor</module>
+        <module>spring-05-filter</module>
+        <module>spring-06-mockmvc</module>
+        <module>spring-07-servlet</module>
+        <module>spring-08-listener</module>
+        <module>spring-09-jsonview</module>
+        <module>spring-10-test-with-server</module>
+        <module>spring-11-selenium</module>
 
 
         <module>springboot-01-helloword</module>
@@ -57,16 +54,10 @@
         <module>springboot-18-thymeleaf</module>
         <module>springboot-19-tester</module>
         <module>springboot-20-data-redis</module>
-		<module>springboot-21-kafka</module>
-		<module>springboot-22-elasticsearch</module>
-		<module>springboot-23-mybatis</module>
-		<module>springboot-24-selenium</module>
-
-
-
-
-
-
+        <module>springboot-21-kafka</module>
+        <module>springboot-22-elasticsearch</module>
+        <module>springboot-23-mybatis</module>
+        <module>springboot-24-selenium</module>
 
 
         <!-- -->
@@ -151,6 +142,19 @@
         </dependencies>
     </dependencyManagement>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+        </dependency>
+    </dependencies>
 
     <repositories>
         <repository>

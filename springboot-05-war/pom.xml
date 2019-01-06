@@ -27,8 +27,8 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <!-- marked the embedded servlet container as provided -->
-            <!-- provided 则无法使用jar run ， 必须要部署到tomcat-->
-            <scope>provided</scope>
+            <!-- provided 则无法使用jar run ， 必须要部署到tomcat
+            <scope>provided</scope>-->
         </dependency>
 
         <!-- hot swapping, disable cache for template, enable live reload -->
